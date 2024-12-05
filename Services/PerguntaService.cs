@@ -1,49 +1,30 @@
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Elevate.QuizApi.Dominio.Entities;
 using Elevate.QuizApi.Services.Interfaces;
+using Elevate.QuizApi.Dominio.Interfaces;
 
 namespace Elevate.QuizApi.Services
 {
 
     public class PerguntaService: IPerguntaService
     {
-        private readonly IPerguntaService _perguntaService;
+        private readonly IPerguntaRepository _perguntaRepository;
         private readonly IRespostaService _respostaService;
 
 
         public PerguntaService(
-            IPerguntaService perguntaService)
+            IPerguntaRepository perguntaRepository)
+            // Aqui deve ser o repositorio
         {
-            _perguntaService = perguntaService;
+            _perguntaRepository = perguntaRepository;
         }
 
-        public async Task<Pergunta> AdicionarPergunta(Pergunta obj)
+        public Task<Pergunta> AdicionarPergunta(Pergunta pergunta)
         {
-            try
-            {
-                var pergunta = new Pergunta(obj.Texto)
-                {
-                    Texto = obj.Texto,
-                    Respostas = obj.Respostas,
-                    Quiz = obj.Quiz
-                };
-
-                // Texto da Pergunta
-                // Tempo em segundos pra pergunta
-                // Como adicionar as respostas? 
-                // Definir qual resposta é a certa
-
-                // Usar Pergunta ou PerguntaDto?
-                return await _perguntaService.AdicionarPergunta(pergunta);
-        
-
-            }
-            catch(Exception ex)
-            {
-                throw new Exception("Erro ao adicionar pergunta", ex);
-
-            }
+            throw new NotImplementedException();
         }
+
+        // Usar service daqui par a fazer VALIDACOES
 
         /*
         - Adicionar pergunta ao banco de dados

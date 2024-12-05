@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Elevate.QuizApi.Dominio.Entities;
 
-namespace Elevate.uizApi.Data.Mappings
+namespace Elevate.QuizApi.Data.Mappings
 {
     public class QuizMap : IEntityTypeConfiguration<Quiz>
     {

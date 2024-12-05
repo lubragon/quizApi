@@ -2725,9 +2725,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\lucasbg\\Desktop\\Elevate\\QuizApi\\quizApi.csproj",
-      "projectName": "quizApi",
-      "projectPath": "C:\\Users\\lucasbg\\Desktop\\Elevate\\QuizApi\\quizApi.csproj",
+      "projectUniqueName": "C:\\Users\\lucasbg\\Desktop\\Elevate\\QuizApi\\QuizApi.csproj",
+      "projectName": "QuizApi",
+      "projectPath": "C:\\Users\\lucasbg\\Desktop\\Elevate\\QuizApi\\QuizApi.csproj",
       "packagesPath": "C:\\Users\\lucasbg\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\lucasbg\\Desktop\\Elevate\\QuizApi\\obj\\",
       "projectStyle": "PackageReference",

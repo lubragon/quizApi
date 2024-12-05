@@ -1,6 +1,6 @@
-@quizApi_HostAddress = http://localhost:5258
+@QuizApi_HostAddress = http://localhost:5258
 
-GET {{quizApi_HostAddress}}/weatherforecast/
+GET {{QuizApi_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###

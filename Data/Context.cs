@@ -1,11 +1,9 @@
-using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Elevate.QuizApi.Data.Mappings;
 using Elevate.QuizApi.Dominio.Entities;
-using Elevate.uizApi.Data.Mappings;
 
-namespace Elevate.QuizApi.Data.Context
+namespace Elevate.QuizApi.Data
 {
     public class Context : DbContext
     {
@@ -21,6 +19,8 @@ namespace Elevate.QuizApi.Data.Context
 
         }
 
+        public DbSet<Pergunta> Perguntas { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -31,11 +31,11 @@ namespace Elevate.QuizApi.Data.Context
             modelBuilder.ApplyConfiguration(new EventoMap());
 
 
-            modelBuilder.Entity<Jogo>()
-                .HasOne(j => j.Quiz)
-                .WithOne(q => q.Jogo)
-                .HasForeignKey<Quiz>(q => q.Id)
-                .IsRequired();
+            // modelBuilder.Entity<Jogo>()
+            //     .HasOne(j => j.Quiz)
+            //     .WithOne(q => q.Jogo)
+            //     .HasForeignKey<Quiz>(q => q.Id)
+            //     .IsRequired();
 
 
             //modelBuilder.ApplyConfiguration(new PlacarMap());

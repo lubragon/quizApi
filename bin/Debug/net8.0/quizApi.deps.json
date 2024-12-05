@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v8.0": {
-      "quizApi/1.0.0": {
+      "QuizApi/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.OpenApi": "8.0.2",
           "Microsoft.EntityFrameworkCore": "8.0.2",
@@ -16,7 +16,7 @@
           "Swashbuckle.AspNetCore": "7.1.0"
         },
         "runtime": {
-          "quizApi.dll": {}
+          "QuizApi.dll": {}
         }
       },
       "Humanizer.Core/2.14.1": {
@@ -549,7 +549,7 @@
     }
   },
   "libraries": {
-    "quizApi/1.0.0": {
+    "QuizApi/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
