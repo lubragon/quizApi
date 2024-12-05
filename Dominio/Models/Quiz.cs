@@ -1,12 +1,13 @@
-using System.Reflection.Metadata;
-using quizApi.Dominio.Enums;
-using quizApi.Dominio.Models;
 
-namespace QuizApi.Dominio.Entities
+using Elevate.QuizApi.Dominio.Enums;
+using Elevate.QuizApi.Dominio.Models;
+
+namespace Elevate.QuizApi.Dominio.Entities
 {
-    public class Quiz(TipoQuizEnum tipo) : ModelBase
+    public class Quiz(TipoQuizEnum tipo, string titulo) : ModelBase
     {
 
+        public string Titulo {get; set;} = titulo;
         public TipoQuizEnum Tipo { get; set; } = tipo;
         public IList<Pergunta> Perguntas { get; set; } = new List<Pergunta>();
 

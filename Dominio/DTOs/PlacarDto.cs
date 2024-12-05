@@ -1,7 +1,7 @@
 using System.Reflection.Metadata;
-using QuizApi.Dominio.Entities;
+using Elevate.QuizApi.Dominio.Entities;
 
-namespace QuizApi.Dominio.DTOs
+namespace Elevate.QuizApi.Dominio.DTOs
 {
     public class PlacarDto 
     {

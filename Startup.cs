@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using QuizApi.Data.Context;
+using Elevate.QuizApi.Data.Context;
 
-namespace QuizApi{
+namespace Elevate.QuizApi{
     
     public class Startup
     {

@@ -1,6 +1,6 @@
-using QuizApi.Services.Interfaces;
+using Elevate.QuizApi.Services.Interfaces;
 
-namespace QuizApi.Services
+namespace Elevate.QuizApi.Services
 {
 
     public class QuizService: IQuizService
@@ -14,6 +14,8 @@ namespace QuizApi.Services
             _quizService = quizService;
         }
 
+
+        
         /*
         Iniciar quiz
         Remover

@@ -2725,11 +2725,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\lucasbg\\Desktop\\Quiz\\quizApi\\quizApi.csproj",
+      "projectUniqueName": "C:\\Users\\lucasbg\\Desktop\\Elevate\\QuizApi\\quizApi.csproj",
       "projectName": "quizApi",
-      "projectPath": "C:\\Users\\lucasbg\\Desktop\\Quiz\\quizApi\\quizApi.csproj",
+      "projectPath": "C:\\Users\\lucasbg\\Desktop\\Elevate\\QuizApi\\quizApi.csproj",
       "packagesPath": "C:\\Users\\lucasbg\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\lucasbg\\Desktop\\Quiz\\quizApi\\obj\\",
+      "outputPath": "C:\\Users\\lucasbg\\Desktop\\Elevate\\QuizApi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\lucasbg\\AppData\\Roaming\\NuGet\\NuGet.Config"

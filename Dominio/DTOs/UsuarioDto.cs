@@ -1,7 +1,8 @@
-using System.Reflection.Metadata;
-using QuizApi.Dominio.Entities;
 
-namespace QuizApi.Dominio.DTOs
+
+using Elevate.QuizApi.Dominio.Entities;
+
+namespace Elevate.QuizApi.Dominio.DTOs
 {
     public class UsuarioDto
     {

@@ -1,4 +1,4 @@
-namespace quizApi.Dominio.Models
+namespace Elevate.QuizApi.Dominio.Models
 {
     public class ModelBase
     {

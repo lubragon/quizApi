@@ -1,8 +1,8 @@
-using System.Reflection.Metadata;
-using quizApi.Dominio.Enums;
-using QuizApi.Dominio.Entities;
 
-namespace QuizApi.Dominio.DTOs
+using Elevate.QuizApi.Dominio.Entities;
+using Elevate.QuizApi.Dominio.Enums;
+
+namespace Elevate.QuizApi.Dominio.DTOs
 {
 
     public class EventoDto

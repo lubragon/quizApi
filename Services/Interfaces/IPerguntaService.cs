@@ -1,12 +1,11 @@
-namespace QuizApi.Services.Interfaces
+using Elevate.QuizApi.Dominio.Entities;
+
+namespace Elevate.QuizApi.Services.Interfaces
 {
 
     public interface IPerguntaService
     {
-
-
-
-        
+        Task<Pergunta> AdicionarPergunta(Pergunta pergunta);
     }
 
 

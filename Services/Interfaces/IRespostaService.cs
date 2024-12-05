@@ -1,13 +1,12 @@
+
 using Elevate.QuizApi.Dominio.Entities;
 
 namespace Elevate.QuizApi.Services.Interfaces
 {
 
-    public interface IQuizService
+    public interface IRespostaService
     {
-
-
-
+        Task<Resposta> AdicionarResposta(Resposta resposta);
         
     }
 

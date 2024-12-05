@@ -1,7 +1,6 @@
-using System.Reflection.Metadata;
-using quizApi.Dominio.Models;
+using Elevate.QuizApi.Dominio.Models;
 
-namespace QuizApi.Dominio.Entities
+namespace Elevate.QuizApi.Dominio.Entities
 {
     public class Resposta(string texto, bool isCorreta) : ModelBase
     {

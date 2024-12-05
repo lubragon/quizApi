@@ -2,9 +2,9 @@
 using System.Reflection.Metadata;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using QuizApi.Dominio.Entities;
+using Elevate.QuizApi.Dominio.Entities;
 
-namespace QuizApi.Data.Mappings
+namespace Elevate.uizApi.Data.Mappings
 {
     public class QuizMap : IEntityTypeConfiguration<Quiz>
     {
@@ -14,14 +14,14 @@ namespace QuizApi.Data.Mappings
 
             builder.HasKey(q => q.Id);
 
+            builder.Property(q => q.Titulo)
+                .HasMaxLength(50);
             builder.Property(q => q.Tipo)
                 .HasMaxLength(50);
+
+
             //builder.Property(q => q.ImagemCaminho).IsUnicode(true);
             // TODO IMAGEM
-
-
-            // TODO DELETAR HAS FOREGIN KEY
-            // DELETAR COLUM NAMES
 
             builder.HasOne(q => q.Evento)
                 .WithMany(e => e.Quizzes);

@@ -1,7 +1,7 @@
 using System.Reflection.Metadata;
-using QuizApi.Dominio.Entities;
+using Elevate.QuizApi.Dominio.Entities;
 
-namespace QuizApi.Dominio.DTOs
+namespace Elevate.QuizApi.Dominio.DTOs
 {
     public class RespostaDto
     {
@@ -11,7 +11,7 @@ namespace QuizApi.Dominio.DTOs
 
         public int IdPergunta { get; set; }
         public Pergunta Pergunta { get; set; }
-        public IList<Usuario> Usuarios { get; set; }
+        //public IList<Usuario> Usuarios { get; set; }
    
 
         public RespostaDto()

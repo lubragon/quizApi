@@ -1,7 +1,7 @@
 using System.Reflection.Metadata;
-using QuizApi.Dominio.Entities;
+using Elevate.QuizApi.Dominio.Entities;
 
-namespace QuizApi.Dominio.DTOs
+namespace Elevate.QuizApi.Dominio.DTOs
 {
     public class PerguntaDto
     {
@@ -9,7 +9,7 @@ namespace QuizApi.Dominio.DTOs
 
         public string Texto { get; set; }
         
-        public TimeSpan Tempo { get; set; }
+        public TimeSpan? Tempo { get; set; }
         public ICollection<Resposta> Respostas { get; set; }
 
         public int IdQuiz { get; set; }

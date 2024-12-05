@@ -1,10 +1,11 @@
 using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using QuizApi.Data.Mappings;
-using QuizApi.Dominio.Entities;
+using Elevate.QuizApi.Data.Mappings;
+using Elevate.QuizApi.Dominio.Entities;
+using Elevate.uizApi.Data.Mappings;
 
-namespace QuizApi.Data.Context
+namespace Elevate.QuizApi.Data.Context
 {
     public class Context : DbContext
     {
@@ -30,7 +31,7 @@ namespace QuizApi.Data.Context
             modelBuilder.ApplyConfiguration(new EventoMap());
 
 
-                modelBuilder.Entity<Jogo>()
+            modelBuilder.Entity<Jogo>()
                 .HasOne(j => j.Quiz)
                 .WithOne(q => q.Jogo)
                 .HasForeignKey<Quiz>(q => q.Id)

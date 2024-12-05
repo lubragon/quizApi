@@ -1,5 +1,5 @@
+using Elevate.QuizApi.Data.Context;
 using Microsoft.EntityFrameworkCore;
-using QuizApi.Data.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 

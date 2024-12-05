@@ -1,4 +1,4 @@
-namespace quizApi.Dominio.Enums
+namespace Elevate.QuizApi.Dominio.Enums
 {
     public enum TipoQuizEnum
     {

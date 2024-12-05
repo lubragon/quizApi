@@ -2,9 +2,9 @@
 using System.Reflection.Metadata;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using QuizApi.Dominio.Entities;
+using Elevate.QuizApi.Dominio.Entities;
 
-namespace QuizApi.Data.Mappings
+namespace Elevate.QuizApi.Data.Mappings
 {
     public class UsuarioMap : IEntityTypeConfiguration<Usuario>
     {

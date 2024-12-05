@@ -1,7 +1,7 @@
-using System.Reflection.Metadata;
-using quizApi.Dominio.Models;
 
-namespace QuizApi.Dominio.Entities
+using Elevate.QuizApi.Dominio.Models;
+
+namespace Elevate.QuizApi.Dominio.Entities
 {
     public class Usuario(string nome, string email, string hashSenha) : ModelBase
     {
