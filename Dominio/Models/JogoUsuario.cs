@@ -4,11 +4,13 @@ using Elevate.QuizApi.Dominio.Models;
 namespace Elevate.QuizApi.Dominio.Entities
 {
 
-    public class Jogo() : ModelBase
+    public class JogoUsuario() : ModelBase
     {
+        public DateTime? DataJogo { get; set; }
+
         public Quiz? Quiz { get; set; }
 
-        public IList<JogoUsuario> JogoUsuario { get; set; } = new List<JogoUsuario>();
+        public Usuario? Usuario { get; set; }
 
 
     }

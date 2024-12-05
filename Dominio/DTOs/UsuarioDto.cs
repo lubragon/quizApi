@@ -4,18 +4,15 @@ using Elevate.QuizApi.Dominio.Entities;
 
 namespace Elevate.QuizApi.Dominio.DTOs
 {
-    public class UsuarioDto
+    public class UsuarioDto : ModelBaseDto
     {
-        public int Id { get; set; }
-
         public string Nome { get; set; }
 
         public string Email { get; set; }
 
         public string HashSenha { get; set; }
 
-        public IList<Quiz> Quizzes {get; set;}
-        public IList<Resposta> Respostas { get; set; }
+        public IList<JogoUsuario> JogoUsuario { get; set; }
 
         public UsuarioDto()
         {
@@ -28,11 +25,7 @@ namespace Elevate.QuizApi.Dominio.DTOs
             Nome = usuario.Nome;
             Email = usuario.Email;
             HashSenha = usuario.HashSenha;
-
-            Quizzes = usuario.Quizzes;
-            //ToDo placar
-            //Placares = usuario.Placar;
-            Respostas = usuario.Respostas;
+            JogoUsuario = usuario.JogoUsuario;
 
         } 
     }

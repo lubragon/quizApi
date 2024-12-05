@@ -12,14 +12,8 @@ namespace Elevate.QuizApi.Dominio.Entities
 
         public string HashSenha { get; set; } = hashSenha;
 
+        public IList<JogoUsuario>? JogoUsuario {get; set;} = new List<JogoUsuario>();
 
-        //Validar
-        public IList<Quiz> Quizzes {get; set;} = new List<Quiz>();
-        //public IList<Placar> Placar {get; set;} = new List<Placar>();
-        // TODO Placar
-        public IList<Resposta> Respostas { get; set; } = new List<Resposta>();
-
-        public Jogo? Jogo {get; set;}
     }
 
 

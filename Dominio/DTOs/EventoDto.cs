@@ -5,10 +5,8 @@ using Elevate.QuizApi.Dominio.Enums;
 namespace Elevate.QuizApi.Dominio.DTOs
 {
 
-    public class EventoDto
+    public class EventoDto : ModelBaseDto
     {
-        public int Id { get; set; }
-
         public DateTime DataInicio { get; set; }
         public DateTime DataFim { get; set; }
 

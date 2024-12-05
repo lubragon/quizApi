@@ -3,10 +3,8 @@ using Elevate.QuizApi.Dominio.Entities;
 
 namespace Elevate.QuizApi.Dominio.DTOs
 {
-    public class PerguntaDto
+    public class PerguntaDto : ModelBaseDto
     {
-        public int Id { get; set; }
-
         public string Texto { get; set; }
         
         public TimeSpan? Tempo { get; set; }
@@ -14,7 +12,6 @@ namespace Elevate.QuizApi.Dominio.DTOs
 
         public int IdQuiz { get; set; }
         
-        public Quiz Quiz { get; set; }
 
         public PerguntaDto()
         {

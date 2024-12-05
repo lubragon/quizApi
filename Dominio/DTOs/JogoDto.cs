@@ -4,13 +4,8 @@ using Elevate.QuizApi.Dominio.Entities;
 namespace Elevate.QuizApi.Dominio.DTOs
 {
 
-    public class JogoDto
+    public class JogoDto :ModelBaseDto
     {
-        public int Id { get; set; }
-        public DateTime DataJogo { get; set; }
-
-        public IList<Usuario> Usuario { get; set; }
-
         public Quiz Quiz { get; set; }
 
         public JogoDto()
@@ -21,8 +16,6 @@ namespace Elevate.QuizApi.Dominio.DTOs
         public JogoDto(Jogo jogo)
         {
             Id = jogo.Id;
-            DataJogo = jogo.DataJogo;
-            Usuario = jogo.Usuario;
             Quiz = jogo.Quiz;
         }
 
