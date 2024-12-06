@@ -12,20 +12,20 @@ namespace Elevate.QuizApi.Dominio.DTOs
         public int IdQuiz { get; set; }
 
         public int Pontuacao { get; set; }
-        public Quiz Quiz { get; set; } 
+        public Quiz? Quiz { get; set; } 
 
-        public IList<Usuario> Usuario { get; set; }
+        public IList<Usuario> Usuario { get; set; } = [];
 
         public PlacarDto()
         {
 
         }
 
-        public PlacarDto(Placar placar)
+        public PlacarDto(Placar placar, int idQuiz)
         {
             Id = placar.Id;
             //IdUsuario = placar.Usuario;
-            IdQuiz = placar.Quiz.Id;
+            IdQuiz = idQuiz;
             Pontuacao = placar.Pontuacao;
             Quiz = placar.Quiz;
             Usuario = placar.Usuario;

@@ -19,12 +19,13 @@ namespace Elevate.QuizApi.Data.Mappings
             builder.Property(q => q.Tipo)
                 .HasMaxLength(50);
 
-
-            //builder.Property(q => q.ImagemCaminho).IsUnicode(true);
-            // TODO IMAGEM
+            builder.HasMany(q => q.Perguntas)
+                .WithOne()
+                .HasForeignKey(p => p.IdQuiz);
 
             builder.HasOne(q => q.Evento)
-                .WithMany(e => e.Quizzes);
+                .WithMany()
+                .HasForeignKey(q => q.IdEvento);
         }
     }
 }

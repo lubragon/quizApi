@@ -12,10 +12,11 @@ namespace Elevate.QuizApi.Dominio.DTOs
 
         public string HashSenha { get; set; }
 
-        public IList<JogoUsuario> JogoUsuario { get; set; }
-
-        public UsuarioDto()
+        public UsuarioDto(string nome, string email, string hashSenha)
         {
+            Nome = nome;
+            Email = email;
+            HashSenha = hashSenha;
 
         }
 
@@ -25,8 +26,6 @@ namespace Elevate.QuizApi.Dominio.DTOs
             Nome = usuario.Nome;
             Email = usuario.Email;
             HashSenha = usuario.HashSenha;
-            JogoUsuario = usuario.JogoUsuario;
-
         } 
     }
 

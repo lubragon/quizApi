@@ -8,21 +8,22 @@ namespace Elevate.QuizApi.Dominio.DTOs
     {
         public DateTime? DataJogo { get; set; }
 
-        public Usuario Usuario { get; set; }
+        public int IdUsuario {get; set;}
+        public Usuario? Usuario { get; set; }
 
-        public Quiz Quiz { get; set; }
-
+        public int IdResposta { get; set; }
+        public IList<Resposta> Resposta { get; set; } = [];
         public JogoUsuarioDto()
         {
 
         }
 
-        public JogoUsuarioDto(JogoUsuario jogoUsuario)
+        public JogoUsuarioDto(JogoUsuario jogoUsuario, int idUsuario)
         {
             Id = jogoUsuario.Id;
             DataJogo = jogoUsuario.DataJogo;
-            Usuario = jogoUsuario.Usuario;
-            Quiz = jogoUsuario.Quiz;
+            IdUsuario = idUsuario;
+            IdResposta = jogoUsuario.IdResposta;
         }
 
 

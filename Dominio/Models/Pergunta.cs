@@ -1,19 +1,41 @@
 
+using Elevate.QuizApi.Dominio.DTOs;
 using Elevate.QuizApi.Dominio.Models;
 
 namespace Elevate.QuizApi.Dominio.Entities
 {
 
-    public class Pergunta(string texto) : ModelBase 
+    public class Pergunta: ModelBase 
     {
 
         
-        public string Texto { get; set; } = texto;
+        public string Texto { get; set; }
         
-        public TimeSpan? Tempo { get; set; }
-        public IList<Resposta> Respostas { get; set; } = new List<Resposta>();
-        // TODO: ou passando public IList<Respostas> Respostas { get; set; } = respostas;
-        public Quiz? Quiz { get; set; }
+        public TimeSpan? Tempo { get; set; } = TimeSpan.FromSeconds(10);
+        public IList<Resposta> Respostas { get; set; } = [];
+        public int IdQuiz {get; set;}
+
+        public Pergunta(string texto)
+        {
+            Texto = texto;
+
+        }
+
+        public Pergunta(string texto, IList<Resposta> respostas)
+        {
+            Texto = texto;
+            Respostas = respostas;
+        }
+
+        public Pergunta(PerguntaDto perguntaDto, int idQuiz)
+        {
+            Id = perguntaDto.Id;
+            Texto = perguntaDto.Texto;
+            Tempo = perguntaDto.Tempo;
+            Respostas = perguntaDto.RespostasDto.Select(r => new Resposta(r.Texto, r.IsCorreta)).ToList();
+            IdQuiz = idQuiz;
+        }
+        // TODO ESTOU TESTANDO A INSERCAO LA NO PROGRAM, VERIFICAR PROBLEMA DE CONTRUTOR E PARAMETRO
 
 
     }

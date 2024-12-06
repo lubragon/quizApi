@@ -1,5 +1,6 @@
 using Elevate.QuizApi.Data;
 using Elevate.QuizApi.Data.Repositories;
+using Elevate.QuizApi.Dominio.DTOs;
 using Elevate.QuizApi.Dominio.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -29,21 +30,30 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 
-var pergunta = new Pergunta("Qual a cpital da franca?")
+// Testes
+var text = "Qual a cpital da franasdsadsca?";
+var list = new List<Resposta> 
 {
-    Respostas = new List<Resposta>
-    {
         new Resposta("Paris", true),
         new Resposta("B", false),
         new Resposta("C", false),
         new Resposta("D", false),
-    }
+};
+
+var pergunta = new Pergunta(text, list)
+{
+    Texto = text,
+    Respostas = list
 };
 
 
 // Apenas para testes aqui TODO
 var dbTeste = app.Services.CreateScope().ServiceProvider.GetService<Context>();
 
+if(dbTeste == null)
+{
+    throw new Exception("Teste em Program.cs");
+}
 
 var perguntaRepo = new PerguntaRepository(dbTeste).AdicionarPergunta(pergunta);
 

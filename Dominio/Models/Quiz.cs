@@ -1,25 +1,37 @@
 
+using Elevate.QuizApi.Dominio.DTOs;
 using Elevate.QuizApi.Dominio.Enums;
 using Elevate.QuizApi.Dominio.Models;
 
 namespace Elevate.QuizApi.Dominio.Entities
 {
-    public class Quiz(TipoQuizEnum tipo, string titulo) : ModelBase
+    public class Quiz : ModelBase
     {
 
-        public string Titulo {get; set;} = titulo;
-        public TipoQuizEnum Tipo { get; set; } = tipo;
-        public IList<Pergunta> Perguntas { get; set; } = new List<Pergunta>();
+        public string Titulo {get; set;}
+        public TipoQuizEnum Tipo { get; set; }
+        public IList<Pergunta> Perguntas { get; set; } = [];
 
-        //public string ImagemCaminho { get; set; }
+        public TimeSpan TempoTotalQuiz { get; set; }
 
-        //public Placar Placar {get; set;} = placar;
-    
+        public int IdEvento { get; set; }
+
         public Evento? Evento { get; set; }
+        public IList<Jogo> Jogo {get; set;} = [];
+        public Quiz(string titulo, TipoQuizEnum tipo)
+        {
+            Titulo = titulo;
+            Tipo = tipo;
 
-        public Jogo Jogo{ get; set; } = null!;
-    
+        }
+
+        public Quiz(QuizDto quizDto, int idEvento)
+        {
+            Id = quizDto.Id;
+            Tipo = quizDto.Tipo;
+            Titulo = quizDto.Titulo;
+            Perguntas = quizDto.Perguntas;
+            IdEvento = idEvento;
+        }
     }
-
-
 }

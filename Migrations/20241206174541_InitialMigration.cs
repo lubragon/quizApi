@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace QuizApi.Migrations
 {
     /// <inheritdoc />
-    public partial class Inicio : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -36,20 +36,6 @@ namespace QuizApi.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Jogo",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    DataJogo = table.Column<DateTime>(type: "datetime(6)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Jogo", x => x.Id);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
                 name: "Usuario",
                 columns: table => new
                 {
@@ -60,17 +46,11 @@ namespace QuizApi.Migrations
                     Email = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     HashSenha = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    JogoId = table.Column<int>(type: "int", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Usuario", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Usuario_Jogo_JogoId",
-                        column: x => x.JogoId,
-                        principalTable: "Jogo",
-                        principalColumn: "Id");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -78,12 +58,14 @@ namespace QuizApi.Migrations
                 name: "Quiz",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Titulo = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Tipo = table.Column<int>(type: "int", maxLength: 50, nullable: false),
-                    EventoId = table.Column<int>(type: "int", nullable: true),
-                    UsuarioId = table.Column<int>(type: "int", nullable: true)
+                    TempoTotalQuiz = table.Column<TimeSpan>(type: "time(6)", nullable: false),
+                    IdEvento = table.Column<int>(type: "int", nullable: false),
+                    EventoId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -94,15 +76,30 @@ namespace QuizApi.Migrations
                         principalTable: "Evento",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Quiz_Jogo_Id",
-                        column: x => x.Id,
-                        principalTable: "Jogo",
+                        name: "FK_Quiz_Evento_IdEvento",
+                        column: x => x.IdEvento,
+                        principalTable: "Evento",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Jogos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    IdQuiz = table.Column<int>(type: "int", nullable: false),
+                    QuizId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Jogos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Quiz_Usuario_UsuarioId",
-                        column: x => x.UsuarioId,
-                        principalTable: "Usuario",
+                        name: "FK_Jogos_Quiz_QuizId",
+                        column: x => x.QuizId,
+                        principalTable: "Quiz",
                         principalColumn: "Id");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -116,16 +113,45 @@ namespace QuizApi.Migrations
                     Texto = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Tempo = table.Column<TimeSpan>(type: "time(6)", nullable: true),
-                    QuizId = table.Column<int>(type: "int", nullable: true)
+                    IdQuiz = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Pergunta", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Pergunta_Quiz_QuizId",
-                        column: x => x.QuizId,
+                        name: "FK_Pergunta_Quiz_IdQuiz",
+                        column: x => x.IdQuiz,
                         principalTable: "Quiz",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "JogoUsuario",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    DataJogo = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    IdUsuario = table.Column<int>(type: "int", nullable: false),
+                    IdResposta = table.Column<int>(type: "int", nullable: false),
+                    JogoId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_JogoUsuario", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_JogoUsuario_Jogos_JogoId",
+                        column: x => x.JogoId,
+                        principalTable: "Jogos",
                         principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_JogoUsuario_Usuario_IdUsuario",
+                        column: x => x.IdUsuario,
+                        principalTable: "Usuario",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -138,48 +164,64 @@ namespace QuizApi.Migrations
                     Texto = table.Column<string>(type: "varchar(500)", maxLength: 500, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Gabarito = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    PerguntaId = table.Column<int>(type: "int", nullable: true)
+                    IdPergunta = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Respostas", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Respostas_Pergunta_PerguntaId",
-                        column: x => x.PerguntaId,
+                        name: "FK_Respostas_Pergunta_IdPergunta",
+                        column: x => x.IdPergunta,
                         principalTable: "Pergunta",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "RespostaUsuario",
+                name: "RespostaJogoUsuario",
                 columns: table => new
                 {
-                    RespostasId = table.Column<int>(type: "int", nullable: false),
-                    UsuarioId = table.Column<int>(type: "int", nullable: false)
+                    JogoUsuarioId = table.Column<int>(type: "int", nullable: false),
+                    RespostaId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RespostaUsuario", x => new { x.RespostasId, x.UsuarioId });
+                    table.PrimaryKey("PK_RespostaJogoUsuario", x => new { x.JogoUsuarioId, x.RespostaId });
                     table.ForeignKey(
-                        name: "FK_RespostaUsuario_Respostas_RespostasId",
-                        column: x => x.RespostasId,
-                        principalTable: "Respostas",
+                        name: "FK_RespostaJogoUsuario_JogoUsuario_JogoUsuarioId",
+                        column: x => x.JogoUsuarioId,
+                        principalTable: "JogoUsuario",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_RespostaUsuario_Usuario_UsuarioId",
-                        column: x => x.UsuarioId,
-                        principalTable: "Usuario",
+                        name: "FK_RespostaJogoUsuario_Respostas_RespostaId",
+                        column: x => x.RespostaId,
+                        principalTable: "Respostas",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pergunta_QuizId",
-                table: "Pergunta",
+                name: "IX_Jogos_QuizId",
+                table: "Jogos",
                 column: "QuizId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_JogoUsuario_IdUsuario",
+                table: "JogoUsuario",
+                column: "IdUsuario");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_JogoUsuario_JogoId",
+                table: "JogoUsuario",
+                column: "JogoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pergunta_IdQuiz",
+                table: "Pergunta",
+                column: "IdQuiz");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Quiz_EventoId",
@@ -187,34 +229,38 @@ namespace QuizApi.Migrations
                 column: "EventoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Quiz_UsuarioId",
+                name: "IX_Quiz_IdEvento",
                 table: "Quiz",
-                column: "UsuarioId");
+                column: "IdEvento");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Respostas_PerguntaId",
+                name: "IX_RespostaJogoUsuario_RespostaId",
+                table: "RespostaJogoUsuario",
+                column: "RespostaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Respostas_IdPergunta",
                 table: "Respostas",
-                column: "PerguntaId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_RespostaUsuario_UsuarioId",
-                table: "RespostaUsuario",
-                column: "UsuarioId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Usuario_JogoId",
-                table: "Usuario",
-                column: "JogoId");
+                column: "IdPergunta");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "RespostaUsuario");
+                name: "RespostaJogoUsuario");
+
+            migrationBuilder.DropTable(
+                name: "JogoUsuario");
 
             migrationBuilder.DropTable(
                 name: "Respostas");
+
+            migrationBuilder.DropTable(
+                name: "Jogos");
+
+            migrationBuilder.DropTable(
+                name: "Usuario");
 
             migrationBuilder.DropTable(
                 name: "Pergunta");
@@ -224,12 +270,6 @@ namespace QuizApi.Migrations
 
             migrationBuilder.DropTable(
                 name: "Evento");
-
-            migrationBuilder.DropTable(
-                name: "Usuario");
-
-            migrationBuilder.DropTable(
-                name: "Jogo");
         }
     }
 }

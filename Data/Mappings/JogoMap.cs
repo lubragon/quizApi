@@ -17,9 +17,8 @@ namespace Elevate.QuizApi.Data.Mappings
             builder.HasKey(j => j.Id);
 
             builder.HasOne(j => j.Quiz)
-                .WithOne(q => q.Jogo)
-                .HasForeignKey<Quiz>(q => q.Id)
-                .IsRequired();
+                .WithMany(q => q.Jogo)
+                .HasForeignKey(j => j.IdQuiz);
 
         }
 

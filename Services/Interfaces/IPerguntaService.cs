@@ -5,7 +5,6 @@ namespace Elevate.QuizApi.Services.Interfaces
 
     public interface IPerguntaService
     {
-        Task<Pergunta> AdicionarPergunta(Pergunta pergunta);
     }
 
 

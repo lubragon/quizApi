@@ -8,18 +8,16 @@ namespace Elevate.QuizApi.Data
     public class Context : DbContext
     {
         public Context() { }
-
-        // public Context(IConfigurationRoot config, DbContextOptions<Context> options) : base(options)
-        // {
-
-        // }
-
         public Context(DbContextOptions options) : base(options)
         {
 
         }
 
-        public DbSet<Pergunta> Perguntas { get; set; }
+        public DbSet<Pergunta> Perguntas { get; set; } = null!;
+        public DbSet<Quiz> Quizzes { get; set; } = null!;
+        public DbSet<Usuario> Usuarios { get; set; } = null!;
+        public DbSet<Jogo> Jogos { get; set; } = null!;
+        public DbSet<JogoUsuario> JogosUsuarios { get; set; } = null!;
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -29,13 +27,7 @@ namespace Elevate.QuizApi.Data
             modelBuilder.ApplyConfiguration(new RespostasMap());
             modelBuilder.ApplyConfiguration(new UsuarioMap());
             modelBuilder.ApplyConfiguration(new EventoMap());
-
-
-            // modelBuilder.Entity<Jogo>()
-            //     .HasOne(j => j.Quiz)
-            //     .WithOne(q => q.Jogo)
-            //     .HasForeignKey<Quiz>(q => q.Id)
-            //     .IsRequired();
+            modelBuilder.ApplyConfiguration(new JogoUsuarioMap());
 
 
             //modelBuilder.ApplyConfiguration(new PlacarMap());

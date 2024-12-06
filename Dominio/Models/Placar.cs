@@ -10,7 +10,7 @@ namespace Elevate.QuizApi.Dominio.Entities
 
         public Quiz? Quiz { get; set; }
 
-        public IList<Usuario>? Usuario { get; set; }
+        public IList<Usuario> Usuario { get; set; } = [];
 
     }
 

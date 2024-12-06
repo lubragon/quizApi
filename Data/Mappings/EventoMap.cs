@@ -22,9 +22,6 @@ namespace Elevate.QuizApi.Data.Mappings
                 .HasMaxLength(500);
 
 
-
-
-
         }
     }
 }

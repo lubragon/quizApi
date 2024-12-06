@@ -23,25 +23,6 @@ namespace Elevate.QuizApi.Data.Mappings
             builder.Property(u => u.HashSenha)
                 .IsUnicode(true)
                 .HasMaxLength(100);
-
-            // Relacionamentos
-
-
-            // builder.HasMany(u => u.Quizzes)
-            //     .WithMany(p => p.Usuario)
-            //     .UsingEntity(j => j.ToTable("PlacarUsuario"));
-
-            builder.HasOne(u => u.Jogo)
-                .WithMany(j => j.Usuario);
-
-
-
-            // TODO - Verificar relacionamentos de Usuario, n tem mais REspostaUsuario
-            builder.HasMany(u => u.Respostas)
-                .WithMany(r => r.Usuario)
-                .UsingEntity(j => j.ToTable("RespostaUsuario"));
-
-            
         }
     }
 }

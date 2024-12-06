@@ -18,8 +18,9 @@ namespace Elevate.QuizApi.Data.Mappings
                 .IsUnicode(true)
                 .HasMaxLength(100);
 
-            builder.HasOne(p => p.Quiz)
-                .WithMany(q => q.Perguntas);
+            builder.HasMany(r => r.Respostas)
+                .WithOne()
+                .HasForeignKey(r => r.IdPergunta);
         }
     }
 }

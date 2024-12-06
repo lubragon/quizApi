@@ -15,12 +15,13 @@ namespace Elevate.QuizApi.Dominio.DTOs
         public StatusEventoEnum Status { get; set; }
         public string Descricao { get; set; }
     
-        public IList<Quiz> Quiz { get; set; }
+        public IList<Quiz> Quiz { get; set; } = [];
 
 
-        public EventoDto()
+        public EventoDto(string titulo, string descricao)
         {
-            
+            Titulo = titulo;
+            Descricao = descricao;
         }
 
         public EventoDto(Evento evento)
@@ -31,7 +32,6 @@ namespace Elevate.QuizApi.Dominio.DTOs
             Titulo = evento.Titulo;
             Status = evento.Status;
             Descricao = evento.Descricao;
-            Quiz = evento.Quizzes;
         }
     }
 
