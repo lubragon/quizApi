@@ -4,6 +4,7 @@ using Elevate.QuizApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace QuizApi.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20241206192244_InitialCommitEndPoint")]
+    partial class InitialCommitEndPoint
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -163,6 +166,8 @@ namespace QuizApi.Migrations
 
                     b.HasIndex("EventoId");
 
+                    b.HasIndex("IdEvento");
+
                     b.ToTable("Quiz", (string)null);
                 });
 
@@ -277,6 +282,14 @@ namespace QuizApi.Migrations
                     b.HasOne("Elevate.QuizApi.Dominio.Entities.Evento", null)
                         .WithMany("Quizzes")
                         .HasForeignKey("EventoId");
+
+                    b.HasOne("Elevate.QuizApi.Dominio.Entities.Evento", "Evento")
+                        .WithMany()
+                        .HasForeignKey("IdEvento")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Evento");
                 });
 
             modelBuilder.Entity("Elevate.QuizApi.Dominio.Entities.Resposta", b =>

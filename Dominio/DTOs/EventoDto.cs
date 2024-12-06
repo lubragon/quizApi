@@ -33,6 +33,12 @@ namespace Elevate.QuizApi.Dominio.DTOs
             Status = evento.Status;
             Descricao = evento.Descricao;
         }
+
+
+        public EventoDto()
+        {
+            
+        }
     }
 
 

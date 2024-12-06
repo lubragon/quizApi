@@ -2,6 +2,9 @@ using Elevate.QuizApi.Data;
 using Elevate.QuizApi.Data.Repositories;
 using Elevate.QuizApi.Dominio.DTOs;
 using Elevate.QuizApi.Dominio.Entities;
+using Elevate.QuizApi.Dominio.Interfaces;
+using Elevate.QuizApi.Services;
+using Elevate.QuizApi.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -17,6 +20,28 @@ builder.Services.AddDbContext<Context>(options =>
             new MySqlServerVersion(new Version(8, 0, 21)))
 );
 
+// IService Service
+builder.Services.AddScoped<IQuizService, QuizService>();
+builder.Services.AddScoped<IPerguntaService, PerguntaService>();
+//builder.Services.AddScoped<IRespostaService, RespostaService>();
+
+//IRepository Repository
+
+builder.Services.AddScoped<IQuizRepository, QuizRepository>();
+builder.Services.AddScoped<IPerguntaRepository, PerguntaRepository>();
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<IJogoRepository, JogoRepository>();
+builder.Services.AddScoped<IJogoUsuarioRepository, JogoUsuarioRepository>();
+
+builder.Services.AddControllers()
+              .AddJsonOptions(options =>
+              {
+                  options.JsonSerializerOptions.IgnoreNullValues = true;
+                  options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+              });
+
+
+
 
 var app = builder.Build();
 
@@ -27,38 +52,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
 
-
-// Testes
-var text = "Qual a cpital da franasdsadsca?";
-var list = new List<Resposta> 
-{
-        new Resposta("Paris", true),
-        new Resposta("B", false),
-        new Resposta("C", false),
-        new Resposta("D", false),
-};
-
-var pergunta = new Pergunta(text, list)
-{
-    Texto = text,
-    Respostas = list
-};
-
-
-// Apenas para testes aqui TODO
-var dbTeste = app.Services.CreateScope().ServiceProvider.GetService<Context>();
-
-if(dbTeste == null)
-{
-    throw new Exception("Teste em Program.cs");
-}
-
-var perguntaRepo = new PerguntaRepository(dbTeste).AdicionarPergunta(pergunta);
-
-
-
+app.MapControllers();
 
 app.Run();
 

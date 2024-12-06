@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace QuizApi.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20241206174541_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20241206192605_InitialMigrationEndPoint")]
+    partial class InitialMigrationEndPoint
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

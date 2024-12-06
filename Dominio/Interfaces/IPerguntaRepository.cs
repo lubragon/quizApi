@@ -1,6 +1,7 @@
 using Elevate.QuizApi.Services;
 using Elevate.QuizApi.Dominio.Entities;
 using Elevate.QuizApi.Services.Interfaces;
+using Elevate.QuizApi.Dominio.DTOs;
 
 
 namespace Elevate.QuizApi.Dominio.Interfaces

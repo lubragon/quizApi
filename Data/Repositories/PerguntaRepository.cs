@@ -21,14 +21,10 @@ namespace Elevate.QuizApi.Data.Repositories
         {
             try
             {
-                
                 _context.Perguntas.Add(obj);
                 await _context.SaveChangesAsync();
 
                 return obj;
-
-        
-
             }
             catch(Exception ex)
             {

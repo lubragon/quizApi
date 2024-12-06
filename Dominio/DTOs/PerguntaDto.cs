@@ -12,11 +12,16 @@ namespace Elevate.QuizApi.Dominio.DTOs
 
         public int IdQuiz { get; set; }
         
-          public PerguntaDto(string texto, IList<RespostaDto> respostasDto)
+        public PerguntaDto(string texto, IList<RespostaDto> respostasDto)
         {
             Texto = texto;
             RespostasDto = respostasDto;
 
+        }
+
+        public PerguntaDto()
+        {
+            
         }
 
         public PerguntaDto(Pergunta pergunta, int idQuiz)

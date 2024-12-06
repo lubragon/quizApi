@@ -20,6 +20,10 @@ namespace Elevate.QuizApi.Dominio.DTOs
 
         }
 
+        public UsuarioDto()
+        {
+            
+        }
         public UsuarioDto(Usuario usuario)
         {
             Id = usuario.Id;

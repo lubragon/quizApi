@@ -3,6 +3,8 @@ using Elevate.QuizApi.Dominio.Entities;
 using Elevate.QuizApi.Services.Interfaces;
 using Elevate.QuizApi.Dominio.Interfaces;
 using System.ComponentModel.DataAnnotations;
+using Elevate.QuizApi.Data.Repositories;
+using Elevate.QuizApi.Dominio.DTOs;
 
 namespace Elevate.QuizApi.Services
 {
@@ -11,18 +13,30 @@ namespace Elevate.QuizApi.Services
     {
 
         private readonly IPerguntaRepository _perguntaRepository;
-        private readonly IRespostaService _respostaService;
 
 
         public PerguntaService(
-            IPerguntaRepository perguntaRepository,
-            IRespostaService respostaService    
+            IPerguntaRepository perguntaRepository
         )
             // Aqui deve ser o repositorio
         {
             _perguntaRepository = perguntaRepository;
-            _respostaService = respostaService;
 
+        }
+
+        public Task<Pergunta> AdicionarPergunta(Pergunta pergunta)
+        {
+            return _perguntaRepository.AdicionarPergunta(pergunta);
+        }
+
+        public Task<Pergunta> DeletarPerguntaById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Pergunta> GetPerguntaById(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 

@@ -8,8 +8,8 @@ namespace Elevate.QuizApi.Dominio.DTOs
     {
         public string Titulo {get; set;}
         public TipoQuizEnum Tipo { get; set; }
-        public IList<Pergunta> Perguntas { get; set; } = [];
-        public int IdEvento { get; set; }
+        public IList<PerguntaDto> Perguntas { get; set; } = [];
+        //public int IdEvento { get; set; }
         public QuizDto(string titulo, TipoQuizEnum tipo)
         {
             Titulo = titulo;
@@ -17,13 +17,18 @@ namespace Elevate.QuizApi.Dominio.DTOs
 
         }
 
-        public QuizDto(Quiz quiz, int idEvento)
+        public QuizDto()
+        {
+
+        }
+
+        public QuizDto(Quiz quiz)
         {
             Id = quiz.Id;
             Tipo = quiz.Tipo;
             Titulo = quiz.Titulo;
-            Perguntas = quiz.Perguntas;
-            IdEvento = idEvento;
+            Perguntas = quiz.Perguntas.Select(p => new PerguntaDto(p,quiz.Id)).ToList();
+            //IdEvento = idEvento;
 
         }
     }

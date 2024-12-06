@@ -14,7 +14,12 @@ namespace Elevate.QuizApi.Dominio.DTOs
         {
             Texto = texto;
             IsCorreta = isCorreta;
-            IdPergunta = idPergunta;
+            IdPergunta = idPergunta;    
+        }
+
+        public RespostaDto()
+        {
+
         }
 
         public RespostaDto(Resposta resposta, int idPergunta)
