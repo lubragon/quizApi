@@ -12,7 +12,7 @@ namespace Elevate.QuizApi.Dominio.Entities
         public string Email { get; set; }
 
         public string HashSenha { get; set; }
-
+        // TODO SENHA E HASH LDAP
 
         public Usuario(string nome, string email, string hashSenha)
         {
@@ -26,7 +26,7 @@ namespace Elevate.QuizApi.Dominio.Entities
             Id = usuarioDto.Id;
             Nome = usuarioDto.Nome;
             Email = usuarioDto.Email;
-            HashSenha = usuarioDto.HashSenha;
+            //HashSenha = usuarioDto.HashSenha;
         }
 
     }

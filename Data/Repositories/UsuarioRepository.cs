@@ -3,6 +3,7 @@ using Elevate.QuizApi.Dominio.Entities;
 using Elevate.QuizApi.Services.Interfaces;
 using Elevate.QuizApi.Dominio.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Elevate.QuizApi.Dominio.DTOs;
 
 
 namespace Elevate.QuizApi.Data.Repositories
@@ -94,7 +95,7 @@ namespace Elevate.QuizApi.Data.Repositories
             }
         }
 
-        public virtual async Task<Usuario> GetUsuarioByEmail(string email)
+        public virtual async Task<UsuarioDto> GetUsuarioByEmail(string email)
         {
             try
             {
@@ -103,8 +104,8 @@ namespace Elevate.QuizApi.Data.Repositories
                 {
                     throw new Exception("Usuário nulo");
                 }
-                
-                return usuario;
+                var usuarioDto = new UsuarioDto(usuario);
+                return usuarioDto;
             }
             catch (Exception ex)
             {
@@ -112,6 +113,8 @@ namespace Elevate.QuizApi.Data.Repositories
             }
         }
 
+
+        // TODO RETORNA LISTA??
         public virtual async Task<List<Usuario>> GetUsuarioByNome(string nome)
         {
             try

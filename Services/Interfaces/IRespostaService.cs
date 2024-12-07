@@ -1,14 +1,15 @@
 
-// using Elevate.QuizApi.Dominio.Entities;
+using Elevate.QuizApi.Dominio.DTOs;
+using Elevate.QuizApi.Dominio.Entities;
 
-// namespace Elevate.QuizApi.Services.Interfaces
-// {
+namespace Elevate.QuizApi.Services.Interfaces
+{
 
-//     public interface IRespostaService
-//     {
-//         Task<Resposta> AdicionarResposta(Resposta resposta);
+    public interface IRespostaService
+    {
+        Task<IList<RespostaDto>> GetAllRespostasByPerguntaId(int idResposta);
         
-//     }
+    }
 
 
 
@@ -16,4 +17,4 @@
 
 
 
-// }
+}

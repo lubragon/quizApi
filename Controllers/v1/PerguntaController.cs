@@ -19,7 +19,7 @@ namespace Elevate.QuizApi.Controllers.v1
                 }
 
                 [HttpPost]
-                [Route("adicionarPergunta/{idQuiz}")]
+                [Route("adicionarPergunta/idQuiz={idQuiz}")]
                 public async Task<IActionResult> AdicionarPergunta(PerguntaDto perguntaDto, int idQuiz)
                 {
                         var pergunta = new Pergunta(perguntaDto, idQuiz);
@@ -28,29 +28,29 @@ namespace Elevate.QuizApi.Controllers.v1
 
 
                 [HttpGet]
-                [Route("getPerguntaById")]
-                public async Task<IActionResult> GetPerguntaById(int idPergunta)
+                [Route("getPerguntaById/idPergunta={id}")]
+                public async Task<IActionResult> GetPerguntaById(int id)
                 
-                        => Ok(await _perguntaService.GetPerguntaById(idPergunta));
+                        => Ok(await _perguntaService.GetPerguntaById(id));
                 
                 [HttpGet]
-                [Route("getAllPerguntasByQuizId")]
+                [Route("getAllPerguntasByQuizId/idQuiz={idQuiz}")]
                 public async Task<IActionResult> GetAllPerguntasByQuizId(int idQuiz)
                 
                         => Ok(await _perguntaService.GetAllPerguntasByQuizId(idQuiz));
                 
                 [HttpGet]
-                [Route("deletarPerguntaById")]
-                public async Task<IActionResult> DeletarPerguntaById(int idPergunta)
+                [Route("deletarPerguntaById/idPergunta={id}")]
+                public async Task<IActionResult> DeletarPerguntaById(int id)
                 
-                        => Ok(await _perguntaService.DeletarPerguntaById(idPergunta));
+                        => Ok(await _perguntaService.DeletarPerguntaById(id));
                 
                 [HttpPatch]
-                [Route("editarPerguntaById")]
-                public async Task<IActionResult> EditarPerguntaById(PerguntaDto perguntaDto, int idPergunta)
+                [Route("editarPerguntaById/idPergunta={id}")]
+                public async Task<IActionResult> EditarPerguntaById(PerguntaDto perguntaDto, int id)
                 {
-                        var pergunta = new Pergunta(perguntaDto, idPergunta);
-                        return Ok (await _perguntaService.EditarPerguntaById(pergunta, idPergunta ));
+                        var pergunta = new Pergunta(perguntaDto, id);
+                        return Ok (await _perguntaService.EditarPerguntaById(pergunta, id ));
                 }
                         
                 

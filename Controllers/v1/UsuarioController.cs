@@ -22,5 +22,18 @@ namespace Elevate.QuizApi.Controllers.v1
                         var usuario = new Usuario(obj);
                         return  Ok(await _usuarioService.CriarUsuario(usuario));
                 }
+
+                [HttpGet]
+                [Route("getUsuarioById/idUsuario={id}")]
+                public async Task<IActionResult> GetUsuarioById(int id)
+                        => Ok(await _usuarioService.GetUsuarioById(id));
+
+                [HttpGet]
+                [Route("getUsuarioByEmail/emailUsuario={email}")]
+                public async Task<IActionResult> GetUsuarioByEmail(string email)
+                        => Ok(await _usuarioService.GetUsuarioByEmail(email));
+
+
+                // TODO Usuario ENDPOINTS
         }
 }

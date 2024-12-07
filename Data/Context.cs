@@ -18,6 +18,7 @@ namespace Elevate.QuizApi.Data
         public DbSet<Usuario> Usuarios { get; set; } = null!;
         public DbSet<Jogo> Jogos { get; set; } = null!;
         public DbSet<JogoUsuario> JogosUsuarios { get; set; } = null!;
+        public DbSet<Resposta> Respostas { get; set; } = null!;
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

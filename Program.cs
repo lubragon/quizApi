@@ -1,3 +1,6 @@
+using System.Text.Encodings.Web;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Elevate.QuizApi.Data;
 using Elevate.QuizApi.Data.Repositories;
 using Elevate.QuizApi.Dominio.DTOs;
@@ -5,6 +8,7 @@ using Elevate.QuizApi.Dominio.Entities;
 using Elevate.QuizApi.Dominio.Interfaces;
 using Elevate.QuizApi.Services;
 using Elevate.QuizApi.Services.Interfaces;
+using Microsoft.AspNetCore.Http.Json;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -24,7 +28,7 @@ builder.Services.AddDbContext<Context>(options =>
 builder.Services.AddScoped<IQuizService, QuizService>();
 builder.Services.AddScoped<IPerguntaService, PerguntaService>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
-//builder.Services.AddScoped<IRespostaService, RespostaService>();
+builder.Services.AddScoped<IRespostaService, RespostaService>();
 
 //IRepository Repository
 
@@ -33,16 +37,23 @@ builder.Services.AddScoped<IPerguntaRepository, PerguntaRepository>();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<IJogoRepository, JogoRepository>();
 builder.Services.AddScoped<IJogoUsuarioRepository, JogoUsuarioRepository>();
+builder.Services.AddScoped<IRespostaRepository, RespostaRepository>();
 
 builder.Services.AddControllers()
               .AddJsonOptions(options =>
               {
-                  options.JsonSerializerOptions.IgnoreNullValues = true;
-                  options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+
+                options.JsonSerializerOptions.IgnoreNullValues = true;
+                options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+             
+                    // options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+                    // options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+                    // options.JsonSerializerOptions.WriteIndented = false;    
+                    // options.JsonSerializerOptions.Encoder = JavaScriptEncoder.Default;
+                    // options.JsonSerializerOptions.AllowTrailingCommas = true;
+                    // options.JsonSerializerOptions.MaxDepth = 3;
+                    // options.JsonSerializerOptions.NumberHandling = JsonNumberHandling.AllowReadingFromString;
               });
-
-
-
 
 var app = builder.Build();
 

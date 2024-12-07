@@ -1,55 +1,27 @@
-// using Microsoft.AspNetCore.Mvc.Formatters;
-// using Elevate.QuizApi.Dominio.Entities;
-// using Elevate.QuizApi.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc.Formatters;
+using Elevate.QuizApi.Dominio.Entities;
+using Elevate.QuizApi.Services.Interfaces;
+using Elevate.QuizApi.Dominio.Interfaces;
+using Elevate.QuizApi.Dominio.DTOs;
 
 
-// namespace Elevate.QuizApi.Services
-// {
+namespace Elevate.QuizApi.Services
+{
 
-//     public class RespostaService : IRespostaService
-//     {
+    public class RespostaService : IRespostaService
+    {
 
-//         private readonly IRespostaService _respostaService;
+        private readonly IRespostaRepository _respostaRepository;
 
-//         public RespostaService(IRespostaService respostaService
-        
-//         )
-//         {
-//             _respostaService = respostaService;
-//         }
-
-
-
-// GET RESPOSTAS FROM PERGUNTA BY: Id?
+        public RespostaService(IRespostaRepository respostaRepository)
+        {
+            _respostaRepository = respostaRepository;
+        }
+        public Task<IList<RespostaDto>> GetAllRespostasByPerguntaId(int id)
+        {
+            return _respostaRepository.GetAllRespostasByPerguntaId(id);
+        }
 
 
-
-
-
-
-
-
-
-//         public async Task<Resposta> AdicionarResposta(Resposta obj)
-//         {
-//             try
-//             {
-//                 var resposta = new Resposta(obj.Texto, obj.IsCorreta)
-//                 {
-//                     Texto = obj.Texto,
-//                     IsCorreta = obj.IsCorreta
-                    
-//                 };
-
-//                 return await _respostaService.AdicionarResposta(resposta);
-//             }
-//             catch(Exception ex)
-//             {
-//                 throw new InvalidOperationException("Erro ao adicionar resposta", ex);
-
-
-//             }
-//         }
-
-//     }
-// }
+    }
+}
