@@ -7,7 +7,6 @@ namespace Elevate.QuizApi.Dominio.DTOs
     {
         public string Texto { get; set; }
         
-        public TimeSpan? Tempo { get; set; } = TimeSpan.FromSeconds(10);
         public IList<RespostaDto> RespostasDto { get; set; } = [];
 
         public int IdQuiz { get; set; }
@@ -28,7 +27,6 @@ namespace Elevate.QuizApi.Dominio.DTOs
         {
             Id = pergunta.Id;
             Texto = pergunta.Texto;
-            Tempo = pergunta.Tempo;
             RespostasDto = pergunta.Respostas.Select(r => new RespostaDto(r, pergunta.Id)).ToList(); // Linq atua nesses casos.
             IdQuiz = idQuiz;
         }

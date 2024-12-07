@@ -13,6 +13,8 @@ namespace Elevate.QuizApi.Dominio.Interfaces
 
         Task<Pergunta> GetPerguntaById(int id);
         Task<Pergunta> DeletarPerguntaById(int id);
+        Task<Pergunta> EditarPerguntaById(Pergunta pergunta, int id);
+        Task<IList<Pergunta>> GetAllPerguntasByQuizId(int id);
 
 
 

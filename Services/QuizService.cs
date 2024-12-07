@@ -20,21 +20,31 @@ namespace Elevate.QuizApi.Services
         {
             return _quizRepository.AdicionarQuiz(quiz);
         }
-
-        public Task<Quiz> AtualizarQuiz(Quiz obj)
+        public Task<IList<Quiz>> GetAllQuizzes()
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<Quiz> DeletarQuizById(int id)
-        {
-            throw new NotImplementedException();
+            return _quizRepository.GetAllQuizzes();
         }
 
         public Task<Quiz> GetQuizById(int id)
         {
-            throw new NotImplementedException();
+            return _quizRepository.GetQuizById(id);
         }
+
+        public Task<Quiz> EditarQuizById(Quiz quiz, int id)
+        {
+            return _quizRepository.EditarQuizById(quiz, id);
+        }
+
+        public Task<Quiz> DeletarQuiz(Quiz obj)
+        {
+            return _quizRepository.DeletarQuiz(obj);
+        }
+        public Task<Quiz> DeletarQuizById(int id)
+        {
+            return _quizRepository.DeletarQuizById(id);
+        }
+
+        
 
 
 

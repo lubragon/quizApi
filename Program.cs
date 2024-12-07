@@ -23,6 +23,7 @@ builder.Services.AddDbContext<Context>(options =>
 // IService Service
 builder.Services.AddScoped<IQuizService, QuizService>();
 builder.Services.AddScoped<IPerguntaService, PerguntaService>();
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 //builder.Services.AddScoped<IRespostaService, RespostaService>();
 
 //IRepository Repository

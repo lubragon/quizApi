@@ -10,6 +10,8 @@ namespace Elevate.QuizApi.Dominio.Entities
 
         public string Titulo {get; set;}
         public TipoQuizEnum Tipo { get; set; }
+
+        public int QuantidadePerguntaPorQuiz { get; set; }
         public IList<Pergunta> Perguntas { get; set; } = [];
 
         public TimeSpan TempoTotalQuiz { get; set; }
@@ -24,12 +26,18 @@ namespace Elevate.QuizApi.Dominio.Entities
             Tipo = tipo;
 
         }
+        
+        public Quiz()
+        {
+            
+        }
 
         public Quiz(QuizDto quizDto)
         {
             Id = quizDto.Id;
             Tipo = quizDto.Tipo;
             Titulo = quizDto.Titulo;
+            QuantidadePerguntaPorQuiz = quizDto.QuantidadePerguntaPorQuiz;
             Perguntas = quizDto.Perguntas.Select(p => new Pergunta(p , quizDto.Id)).ToList();
             //IdEvento = idEvento;
         }

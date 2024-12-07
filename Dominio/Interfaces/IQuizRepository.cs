@@ -9,8 +9,10 @@ namespace Elevate.QuizApi.Dominio.Interfaces
     public interface IQuizRepository
     {
         Task<Quiz> AdicionarQuiz(Quiz quiz);
+        Task<Quiz> DeletarQuiz (Quiz quiz);
         Task<Quiz> DeletarQuizById (int id);
-        Task<Quiz> AtualizarQuiz(Quiz obj);
+        Task<Quiz> EditarQuizById(Quiz obj, int id);
         Task<Quiz> GetQuizById(int id);
+        Task <IList<Quiz>> GetAllQuizzes();
     }
 }

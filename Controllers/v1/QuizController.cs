@@ -22,6 +22,34 @@ namespace Elevate.QuizApi.Controllers.v1
                         var quiz = new Quiz(obj);
                         return  Ok(await _quizService.AdicionarQuiz(quiz));
                 }
+                
+                [HttpPost]
+                [Route("deletarQuizById")]
+                public async Task<IActionResult> DeletarQuiz(QuizDto obj)
+                {
+                        var quiz = new Quiz(obj);
+                        return  Ok(await _quizService.DeletarQuiz(quiz));
+                }
+
+                [HttpGet]
+                [Route("getAllQuizzes")]
+                public async Task<IActionResult> GetAllQuizes()
+                
+                        => Ok(await _quizService.GetAllQuizzes());
+                
+                [HttpGet]
+                [Route("getQuizById")]
+                public async Task<IActionResult> GetQuizById(int id)
+                
+                        => Ok(await _quizService.GetQuizById(id));
+                
+                [HttpPatch]
+                [Route("editarQuizById")]
+                public async Task<IActionResult> EditarQuizById(QuizDto obj, int id)
+                {
+                        var quiz = new Quiz(obj);
+                        return  Ok(await _quizService.EditarQuizById(quiz, id));
+                }
 
                        
 

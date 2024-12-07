@@ -10,8 +10,6 @@ namespace Elevate.QuizApi.Dominio.Entities
 
         
         public string Texto { get; set; }
-        
-        public TimeSpan? Tempo { get; set; } = TimeSpan.FromSeconds(10);
         public IList<Resposta> Respostas { get; set; } = [];
         public int IdQuiz {get; set;}
 
@@ -31,7 +29,6 @@ namespace Elevate.QuizApi.Dominio.Entities
         {
             Id = perguntaDto.Id;
             Texto = perguntaDto.Texto;
-            Tempo = perguntaDto.Tempo;
             Respostas = perguntaDto.RespostasDto.Select(r => new Resposta(r.Texto, r.IsCorreta)).ToList();
             IdQuiz = idQuiz;
         }

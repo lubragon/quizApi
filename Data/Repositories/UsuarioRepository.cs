@@ -62,9 +62,7 @@ namespace Elevate.QuizApi.Data.Repositories
                 {
                     throw new Exception($"Usuário com ID {usuario.Id} não foi encontrado.");
                 }
-                usuarioExistente.Nome = usuario.Nome;
-                usuarioExistente.Email = usuario.Email;
-                usuarioExistente.HashSenha = usuario.HashSenha;
+                usuarioExistente = usuario;
                 _context.Usuarios.Update(usuarioExistente);
                 await _context.SaveChangesAsync();
                 return usuarioExistente;

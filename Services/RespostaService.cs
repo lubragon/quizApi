@@ -18,6 +18,18 @@
 //             _respostaService = respostaService;
 //         }
 
+
+
+// GET RESPOSTAS FROM PERGUNTA BY: Id?
+
+
+
+
+
+
+
+
+
 //         public async Task<Resposta> AdicionarResposta(Resposta obj)
 //         {
 //             try

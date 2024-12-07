@@ -19,16 +19,10 @@ namespace Elevate.QuizApi.Data.Repositories
             _context = context;
         }
 
-        public virtual async Task<Quiz> AdicionarQuiz(Quiz obj)
+        public virtual async Task<Quiz> AdicionarQuiz(Quiz quiz)
         {
             try
             {
-                var quiz = new Quiz(obj.Titulo, obj.Tipo)
-                {
-                    Titulo = obj.Titulo,
-                    Tipo = obj.Tipo,
-                };
-
                 _context.Quizzes.Add(quiz);
                 await _context.SaveChangesAsync();
 
@@ -41,11 +35,32 @@ namespace Elevate.QuizApi.Data.Repositories
         }
 
 
-        public virtual async Task<Quiz> DeletarQuizById(int id)
+        public virtual async Task<Quiz> DeletarQuiz(Quiz quiz)
         {
             try
             {
-                var quiz = await _context.Quizzes.FindAsync(id);
+                if (quiz == null)
+                {
+                    throw new InvalidOperationException("Quiz não encontrado.");
+                }
+
+                _context.Quizzes.Remove(quiz);
+
+                await _context.SaveChangesAsync();
+
+                return quiz;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Erro ao obter quiz", ex);
+            }
+        }
+
+        public virtual async Task<Quiz> DeletarQuizById(int quizId)
+        {
+            try
+            {
+                var quiz = await _context.Quizzes.FindAsync(quizId);
                 if (quiz == null)
                 {
                     throw new InvalidOperationException("Quiz está nulo.");
@@ -63,18 +78,17 @@ namespace Elevate.QuizApi.Data.Repositories
             }
         }
 
-        public virtual async Task<Quiz> AtualizarQuiz(Quiz obj)
+        public virtual async Task<Quiz> EditarQuizById(Quiz quiz, int id)
         {
             try
             {
-                var quizExistente = await _context.Quizzes.FindAsync(obj.Id);
+                var quizExistente = await _context.Quizzes.FindAsync(id);
                 if (quizExistente == null)
                 {
-                    throw new InvalidOperationException($"Quiz com ID {obj.Id} não foi encontrado.");
+                    throw new InvalidOperationException($"Quiz com ID {id} não foi encontrado.");
                 }
 
-                quizExistente.Titulo = obj.Titulo;
-                quizExistente.Tipo = obj.Tipo;
+                quizExistente = quiz;
 
                 _context.Quizzes.Update(quizExistente);
                 await _context.SaveChangesAsync();
@@ -107,6 +121,26 @@ namespace Elevate.QuizApi.Data.Repositories
             }
         }    
 
+
+        public virtual async Task<IList<Quiz>> GetAllQuizzes()
+        {
+            try
+            {
+
+                var quizzes = await _context.Quizzes.ToListAsync();
+                if(quizzes == null)
+                {
+                    throw new Exception("Nenhum quiz encontrado");
+                }
+
+
+                return quizzes;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao obter o quiz", ex);
+            }
+        }    
 
 
 

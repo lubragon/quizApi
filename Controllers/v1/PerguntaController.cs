@@ -26,8 +26,34 @@ namespace Elevate.QuizApi.Controllers.v1
                         return  Ok(await _perguntaService.AdicionarPergunta(pergunta));
                 }
 
-                       
 
+                [HttpGet]
+                [Route("getPerguntaById")]
+                public async Task<IActionResult> GetPerguntaById(int idPergunta)
+                
+                        => Ok(await _perguntaService.GetPerguntaById(idPergunta));
+                
+                [HttpGet]
+                [Route("getAllPerguntasByQuizId")]
+                public async Task<IActionResult> GetAllPerguntasByQuizId(int idQuiz)
+                
+                        => Ok(await _perguntaService.GetAllPerguntasByQuizId(idQuiz));
+                
+                [HttpGet]
+                [Route("deletarPerguntaById")]
+                public async Task<IActionResult> DeletarPerguntaById(int idPergunta)
+                
+                        => Ok(await _perguntaService.DeletarPerguntaById(idPergunta));
+                
+                [HttpPatch]
+                [Route("editarPerguntaById")]
+                public async Task<IActionResult> EditarPerguntaById(PerguntaDto perguntaDto, int idPergunta)
+                {
+                        var pergunta = new Pergunta(perguntaDto, idPergunta);
+                        return Ok (await _perguntaService.EditarPerguntaById(pergunta, idPergunta ));
+                }
+                        
+                
 
         }
 }

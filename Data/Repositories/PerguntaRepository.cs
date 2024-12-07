@@ -52,13 +52,32 @@ namespace Elevate.QuizApi.Data.Repositories
                 throw new Exception("Erro ao obter pergunta", ex);
             }
         }
+        public virtual async Task<IList<Pergunta>> GetAllPerguntasByQuizId(int id)
+        {
+            try
+            {
+                var perguntas = await _context.Perguntas
+                    .Where(p => p.IdQuiz == id)
+                    .Include(p => p.Respostas)
+                    .ToListAsync();
+                if(perguntas == null)
+                {
+                    throw new Exception("Pergunta nula");
+                }
+
+                return perguntas;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Erro ao obter pergunta", ex);
+            }
+        }
 
         public virtual async Task<Pergunta> DeletarPerguntaById(int id)
         {
             try
             {
                 var pergunta = await _context.Perguntas
-                    .Include(p => p.Respostas)
                     .FirstOrDefaultAsync(p => p.Id == id);
 
                 if(pergunta == null)
@@ -83,18 +102,18 @@ namespace Elevate.QuizApi.Data.Repositories
         }
 
 
-        public virtual async Task<Pergunta> AtualizarPergunta(Pergunta obj)
+        public virtual async Task<Pergunta> EditarPerguntaById(Pergunta obj, int id)
         {
             try
             {
-                var perguntaExistente = await _context.Perguntas.FindAsync(obj.Id);
+                var perguntaExistente = await _context.Perguntas.FindAsync(id);
 
                 if(perguntaExistente == null)
                 {
                     throw new InvalidOperationException($"Pergunta não encontrada.");
                 }
 
-                perguntaExistente.Texto = obj.Texto;
+                perguntaExistente = obj;
 
                 _context.Perguntas.Update(perguntaExistente);
                 await _context.SaveChangesAsync();

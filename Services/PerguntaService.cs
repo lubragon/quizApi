@@ -28,15 +28,24 @@ namespace Elevate.QuizApi.Services
         {
             return _perguntaRepository.AdicionarPergunta(pergunta);
         }
+        public Task<Pergunta> EditarPerguntaById(Pergunta pergunta, int id)
+        {
+            return _perguntaRepository.EditarPerguntaById(pergunta, id);
+        }
+
 
         public Task<Pergunta> DeletarPerguntaById(int id)
         {
-            throw new NotImplementedException();
+            return _perguntaRepository.DeletarPerguntaById(id);
         }
 
         public Task<Pergunta> GetPerguntaById(int id)
         {
-            throw new NotImplementedException();
+            return _perguntaRepository.GetPerguntaById(id);
+        }
+        public Task<IList<Pergunta>> GetAllPerguntasByQuizId(int id)
+        {
+            return _perguntaRepository.GetAllPerguntasByQuizId(id);
         }
     }
 
