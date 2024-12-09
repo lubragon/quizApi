@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "6/F/PHnK2Ps=",
+  "dgSpecHash": "i/70PPuq7DI=",
   "success": true,
-  "projectFilePath": "C:\\Users\\lucasbg\\Desktop\\Elevate\\QuizApi\\QuizApi.csproj",
+  "projectFilePath": "c:\\Users\\lucasbg\\Desktop\\Elevate\\QuizApi\\QuizApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\lucasbg\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\lucasbg\\.nuget\\packages\\microsoft.aspnetcore.openapi\\8.0.2\\microsoft.aspnetcore.openapi.8.0.2.nupkg.sha512",

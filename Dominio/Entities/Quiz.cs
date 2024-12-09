@@ -38,7 +38,7 @@ namespace Elevate.QuizApi.Dominio.Entities
             Tipo = quizDto.Tipo;
             Titulo = quizDto.Titulo;
             QuantidadePerguntaPorQuiz = quizDto.QuantidadePerguntaPorQuiz;
-            Perguntas = quizDto.Perguntas.Select(p => new Pergunta(p , quizDto.Id)).ToList();
+            //Perguntas = quizDto.Perguntas.Select(p => new Pergunta(p , quizDto.Id)).ToList();
             //IdEvento = idEvento;
         }
     }

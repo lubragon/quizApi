@@ -1,3 +1,4 @@
+using Elevate.QuizApi.Dominio.DTOs;
 using Elevate.QuizApi.Dominio.Entities;
 using Elevate.QuizApi.Dominio.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -14,18 +15,21 @@ namespace Elevate.QuizApi.Data.Repositories
         {
             _context = context;
         }
-        public virtual async Task<Jogo> CriarJogo(Jogo obj)
+        public virtual async Task<Jogo> CriarJogo(Jogo jogo, int idQuiz)
         {
+        
             try
             {
-
-                _context.Jogos.Add(obj);
+                                
+                _context.Jogos.Add(jogo);
                 await _context.SaveChangesAsync();
-                return obj;
+
+                return jogo;
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
-                throw new Exception("Erro ao criar o jogo", ex);
+                throw new Exception("Erro ao criar jogo", ex);
+
             }
         }
 
@@ -53,7 +57,7 @@ namespace Elevate.QuizApi.Data.Repositories
         {
             try
             {
-                var jogo = await _context.Jogos.Include(j => j.JogoUsuario).FirstOrDefaultAsync(j => j.Id == id);
+                var jogo = await _context.Jogos.Include(j => j.JogoUsuarios).FirstOrDefaultAsync(j => j.Id == id);
 
                 if(jogo == null)
                 {
@@ -71,7 +75,7 @@ namespace Elevate.QuizApi.Data.Repositories
         {
             try
             {
-                return await _context.Jogos.Include(j => j.JogoUsuario).ToListAsync();
+                return await _context.Jogos.Include(j => j.JogoUsuarios).ToListAsync();
             }
             catch (Exception ex)
             {

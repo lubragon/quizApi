@@ -1,3 +1,4 @@
+using Elevate.QuizApi.Dominio.DTOs;
 using Elevate.QuizApi.Dominio.Entities;
 
 namespace Elevate.QuizApi.Services.Interfaces
@@ -10,7 +11,7 @@ namespace Elevate.QuizApi.Services.Interfaces
         Task<Quiz> DeletarQuizById (int id);
         Task<Quiz> EditarQuizById(Quiz quiz, int id);
         Task<Quiz> GetQuizById(int id);
-        Task<IList<Quiz>> GetAllQuizzes();
+        Task<IList<QuizDto>> GetAllQuizzes();
 
 
 

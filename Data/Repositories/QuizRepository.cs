@@ -3,6 +3,7 @@ using Elevate.QuizApi.Dominio.Entities;
 using Elevate.QuizApi.Services.Interfaces;
 using Elevate.QuizApi.Dominio.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Elevate.QuizApi.Dominio.DTOs;
 
 
 namespace Elevate.QuizApi.Data.Repositories
@@ -122,7 +123,7 @@ namespace Elevate.QuizApi.Data.Repositories
         }    
 
 
-        public virtual async Task<IList<Quiz>> GetAllQuizzes()
+        public virtual async Task<IList<QuizDto>> GetAllQuizzes()
         {
             try
             {
@@ -133,8 +134,8 @@ namespace Elevate.QuizApi.Data.Repositories
                     throw new Exception("Nenhum quiz encontrado");
                 }
 
-
-                return quizzes;
+                var quizzesDto = quizzes.Select(q => new QuizDto(q)).ToList();
+                return quizzesDto;
             }
             catch (Exception ex)
             {

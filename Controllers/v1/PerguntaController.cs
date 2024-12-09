@@ -19,8 +19,8 @@ namespace Elevate.QuizApi.Controllers.v1
                 }
 
                 [HttpPost]
-                [Route("adicionarPergunta/idQuiz={idQuiz}")]
-                public async Task<IActionResult> AdicionarPergunta(PerguntaDto perguntaDto, int idQuiz)
+                [Route("adicionarPergunta/{idQuiz}")]
+                public async Task<IActionResult> AdicionarPergunta([FromBody] PerguntaDto perguntaDto, int idQuiz)
                 {
                         var pergunta = new Pergunta(perguntaDto, idQuiz);
                         return  Ok(await _perguntaService.AdicionarPergunta(pergunta));
@@ -28,7 +28,7 @@ namespace Elevate.QuizApi.Controllers.v1
 
 
                 [HttpGet]
-                [Route("getPerguntaById/idPergunta={id}")]
+                [Route("getPerguntaById/{id}")]
                 public async Task<IActionResult> GetPerguntaById(int id)
                 
                         => Ok(await _perguntaService.GetPerguntaById(id));

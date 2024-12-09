@@ -7,14 +7,14 @@ namespace Elevate.QuizApi.Dominio.DTOs
     {
         public string Texto { get; set; }
         
-        public IList<RespostaDto> RespostasDto { get; set; } = [];
+        public IList<RespostaDto> Respostas { get; set; } = [];
 
         public int IdQuiz { get; set; }
         
-        public PerguntaDto(string texto, IList<RespostaDto> respostasDto)
+        public PerguntaDto(string texto, IList<RespostaDto> respostas)
         {
             Texto = texto;
-            RespostasDto = respostasDto;
+            Respostas = respostas;
 
         }
 
@@ -28,7 +28,7 @@ namespace Elevate.QuizApi.Dominio.DTOs
             Id = pergunta.Id;
             Texto = pergunta.Texto;
             IdQuiz = idQuiz;
-            RespostasDto = pergunta.Respostas.Select(r => new RespostaDto(r, pergunta.Id)).ToList(); // Linq atua nesses casos.
+            Respostas = pergunta.Respostas.Select(r => new RespostaDto(r, pergunta.Id)).ToList(); // Linq atua nesses casos.
         }
 
 

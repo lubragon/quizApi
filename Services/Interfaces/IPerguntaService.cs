@@ -17,7 +17,4 @@ namespace Elevate.QuizApi.Services.Interfaces
 
 
 
-
-
-
 }

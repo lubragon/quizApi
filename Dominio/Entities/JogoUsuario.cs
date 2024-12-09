@@ -11,6 +11,8 @@ namespace Elevate.QuizApi.Dominio.Entities
 
         public int IdUsuario {get; set;}
         public Usuario? Usuario { get; set; }
+        public int idJogo { get; set; }
+        public Jogo? Jogo { get; set; }
 
         public int IdResposta { get; set; }
         public IList<Resposta> Resposta { get; set; } = [];

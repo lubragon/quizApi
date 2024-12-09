@@ -30,7 +30,7 @@ namespace Elevate.QuizApi.Dominio.Entities
             Id = perguntaDto.Id;
             Texto = perguntaDto.Texto;
             IdQuiz = idQuiz;
-            Respostas = perguntaDto.RespostasDto.Select(r => new Resposta(r.Texto, r.IsCorreta)).ToList();
+            Respostas = perguntaDto.Respostas.Select(r => new Resposta(r.Texto, r.IsCorreta)).ToList();
         }
         // TODO ESTOU TESTANDO A INSERCAO LA NO PROGRAM, VERIFICAR PROBLEMA DE CONTRUTOR E PARAMETRO
 

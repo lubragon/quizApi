@@ -3,6 +3,7 @@ using Elevate.QuizApi.Dominio.Entities;
 using Elevate.QuizApi.Services.Interfaces;
 using Elevate.QuizApi.Dominio.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Elevate.QuizApi.Dominio.DTOs;
 
 
 namespace Elevate.QuizApi.Data.Repositories
@@ -18,7 +19,7 @@ namespace Elevate.QuizApi.Data.Repositories
             _context = context;
         }
 
-        public virtual async Task<JogoUsuario> CriarJogoUsuario(JogoUsuario obj)
+        public virtual async Task<JogoUsuario> CriarJogoUsuario(JogoUsuario obj, int idQuiz, int idJogo)
         {
             try
             {
@@ -36,7 +37,12 @@ namespace Elevate.QuizApi.Data.Repositories
                 throw new Exception("Erro ao criar o jogo do usuário", ex);
             }
         }
-    
+
+        public Task<JogoUsuarioDto> CriarJogoUsuario(JogoUsuarioDto jogoUsuarioDto, int idQuiz, int idJogo)
+        {
+            throw new NotImplementedException();
+        }
+
         public virtual async Task<JogoUsuario> DeletarJogoUsuarioById(int id)
         {
             try
@@ -56,23 +62,23 @@ namespace Elevate.QuizApi.Data.Repositories
             }
         }
 
-        public virtual async Task<JogoUsuario> GetJogoUsuarioById(int id)
-        {
-            try
-            {
-                var jogoUsuario = await _context.JogosUsuarios.Include(ju => ju.Usuario).Include(ju => ju.Resposta).FirstOrDefaultAsync(ju => ju.Id == id);
-                if (jogoUsuario == null)
-                {
-                    throw new InvalidOperationException($"Jogo do usuário com ID {id} não foi encontrado.");
-                }
+        // public virtual async Task<JogoUsuario> GetJogoUsuarioById(int id)
+        // {
+        //     try
+        //     {
+        //         var jogoUsuario = await _context.JogosUsuarios.Include(ju => ju.Usuario).Include(ju => ju.Resposta).FirstOrDefaultAsync(ju => ju.Id == id);
+        //         if (jogoUsuario == null)
+        //         {
+        //             throw new InvalidOperationException($"Jogo do usuário com ID {id} não foi encontrado.");
+        //         }
                 
-                return jogoUsuario;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Erro ao obter o jogo do usuário pelo ID", ex);
-            }
-        }
+        //         return jogoUsuario;
+        //     }
+        //     catch (Exception ex)
+        //     {
+        //         throw new Exception("Erro ao obter o jogo do usuário pelo ID", ex);
+        //     }
+        // }
 
         public virtual async Task<List<JogoUsuario>> GetTodosJogosUsuarios()
         {
