@@ -25,14 +25,11 @@ namespace Elevate.QuizApi.Controllers.v1
 					}
 
         [HttpPost]
-        [Route("criarJogo")]
-        public async Task<IActionResult> CriarJogo(JogoDto jogoDto, int idQuiz)
+        [Route("criarJogo/{idQuiz}")]
+        public async Task<IActionResult> CriarJogo(int idQuiz)
         {
-            if (jogoDto == null)
-            {
-                return BadRequest("Jogo é nulo.");
-            }
-						var jogo = new Jogo(jogoDto, idQuiz);
+            
+						var jogo = new Jogo(idQuiz);
 						return  Ok(await _jogoService.CriarJogo(jogo, idQuiz));
 
         }

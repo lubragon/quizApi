@@ -20,9 +20,9 @@ namespace Elevate.QuizApi.Controllers.v1
 			}
 
 			[HttpGet]
-			[Route("getAllRespostasByPerguntaId/idPergunta={id}")]
-			public async Task<IActionResult> GetAllRespostasByPerguntaId(int id)
+			[Route("getAllRespostasByPerguntaId")]
+			public async Task<IActionResult> GetAllRespostasByPerguntaId(int idPergunta)
 
-							=> Ok(await _respostaService.GetAllRespostasByPerguntaId(id));
+							=> Ok(await _respostaService.GetAllRespostasByPerguntaId(idPergunta));
 		}
 }

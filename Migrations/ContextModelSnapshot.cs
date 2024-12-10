@@ -22,40 +22,6 @@ namespace QuizApi.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("Elevate.QuizApi.Dominio.Entities.Evento", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("DataFim")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime>("DataInicio")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("Descricao")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .IsUnicode(true)
-                        .HasColumnType("varchar(500)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Titulo")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .IsUnicode(true)
-                        .HasColumnType("varchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Evento", (string)null);
-                });
-
             modelBuilder.Entity("Elevate.QuizApi.Dominio.Entities.Jogo", b =>
                 {
                     b.Property<int>("Id")
@@ -141,9 +107,6 @@ namespace QuizApi.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("EventoId")
-                        .HasColumnType("int");
-
                     b.Property<int>("IdEvento")
                         .HasColumnType("int");
 
@@ -163,8 +126,6 @@ namespace QuizApi.Migrations
                         .HasColumnType("varchar(50)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("EventoId");
 
                     b.ToTable("Quiz", (string)null);
                 });
@@ -260,7 +221,7 @@ namespace QuizApi.Migrations
                         .IsRequired();
 
                     b.HasOne("Elevate.QuizApi.Dominio.Entities.Jogo", "Jogo")
-                        .WithMany("JogoUsuario")
+                        .WithMany("JogoUsuarios")
                         .HasForeignKey("JogoId");
 
                     b.Navigation("Jogo");
@@ -275,13 +236,6 @@ namespace QuizApi.Migrations
                         .HasForeignKey("IdQuiz")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Elevate.QuizApi.Dominio.Entities.Quiz", b =>
-                {
-                    b.HasOne("Elevate.QuizApi.Dominio.Entities.Evento", null)
-                        .WithMany("Quizzes")
-                        .HasForeignKey("EventoId");
                 });
 
             modelBuilder.Entity("Elevate.QuizApi.Dominio.Entities.Resposta", b =>
@@ -308,14 +262,9 @@ namespace QuizApi.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Elevate.QuizApi.Dominio.Entities.Evento", b =>
-                {
-                    b.Navigation("Quizzes");
-                });
-
             modelBuilder.Entity("Elevate.QuizApi.Dominio.Entities.Jogo", b =>
                 {
-                    b.Navigation("JogoUsuario");
+                    b.Navigation("JogoUsuarios");
                 });
 
             modelBuilder.Entity("Elevate.QuizApi.Dominio.Entities.Pergunta", b =>

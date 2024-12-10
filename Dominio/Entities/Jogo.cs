@@ -16,6 +16,10 @@ namespace Elevate.QuizApi.Dominio.Entities
         {
 
         }
+        public Jogo(int idQuiz)
+        {
+            IdQuiz = idQuiz;
+        }
         public Jogo(JogoDto jogoDto, int idQuiz)
         {
             Id = jogoDto.Id;

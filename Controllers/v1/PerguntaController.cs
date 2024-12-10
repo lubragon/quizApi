@@ -34,8 +34,8 @@ namespace Elevate.QuizApi.Controllers.v1
                         => Ok(await _perguntaService.GetPerguntaById(id));
                 
                 [HttpGet]
-                [Route("getAllPerguntasByQuizId/idQuiz={idQuiz}")]
-                public async Task<IActionResult> GetAllPerguntasByQuizId(int idQuiz)
+                [Route("getAllPerguntasByQuizId")]
+                public async Task<IActionResult> GetAllPerguntasByQuizId([FromQuery]  int idQuiz)
                 
                         => Ok(await _perguntaService.GetAllPerguntasByQuizId(idQuiz));
                 

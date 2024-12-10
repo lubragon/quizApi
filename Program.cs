@@ -10,6 +10,7 @@ using Elevate.QuizApi.Services;
 using Elevate.QuizApi.Services.Interfaces;
 using Microsoft.AspNetCore.Http.Json;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,6 +30,8 @@ builder.Services.AddScoped<IQuizService, QuizService>();
 builder.Services.AddScoped<IPerguntaService, PerguntaService>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<IRespostaService, RespostaService>();
+builder.Services.AddScoped<IJogoService, JogoService>();
+
 
 //IRepository Repository
 
@@ -63,6 +66,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// var ldapSettings = new LDAPSettings();
+// new ConfigureFromConfigurationOptions<LDAPSettings>(Configuration.GetSection("LDAPSettings")).Configure(ldapSettings);
+
 app.UseCors(options => options.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader());
 
 

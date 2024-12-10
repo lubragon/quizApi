@@ -23,7 +23,7 @@ namespace Elevate.QuizApi.Dominio.Entities
         public JogoUsuario(JogoUsuarioDto jogoUsuarioDto)
         {
             Id = jogoUsuarioDto.Id;
-            DataJogo = jogoUsuarioDto.DataJogo;
+            //DataJogo = jogoUsuarioDto.DataJogo;
             IdUsuario = jogoUsuarioDto.IdUsuario;
             IdResposta = jogoUsuarioDto.IdUsuario;
         }

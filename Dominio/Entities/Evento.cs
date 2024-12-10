@@ -15,7 +15,7 @@ namespace Elevate.QuizApi.Dominio.Entities
         public StatusEventoEnum Status { get; set; }
         public string Descricao { get; set; }
     
-        public IList<Quiz> Quizzes { get; set; } = [];
+        //public IList<Quiz> Quizzes { get; set; } = [];
     
         public Evento(string titulo, string descricao)
         {

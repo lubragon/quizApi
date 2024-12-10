@@ -26,9 +26,11 @@ namespace Elevate.QuizApi.Services
             return _quizRepository.GetAllQuizzes();
         }
 
-        public Task<Quiz> GetQuizById(int id)
+        public async Task<QuizDto> GetQuizById(int id)
         {
-            return _quizRepository.GetQuizById(id);
+            var quizz = await _quizRepository.GetQuizById(id);
+
+            return new QuizDto(quizz);
         }
 
         public Task<Quiz> EditarQuizById(Quiz quiz, int id)

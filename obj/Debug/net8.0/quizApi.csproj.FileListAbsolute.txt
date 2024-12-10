@@ -210,3 +210,4 @@ C:\Users\lucasbg\Desktop\Elevate\QuizApi\obj\Debug\net8.0\refint\QuizApi.dll
 C:\Users\lucasbg\Desktop\Elevate\QuizApi\obj\Debug\net8.0\QuizApi.pdb
 C:\Users\lucasbg\Desktop\Elevate\QuizApi\obj\Debug\net8.0\QuizApi.genruntimeconfig.cache
 C:\Users\lucasbg\Desktop\Elevate\QuizApi\obj\Debug\net8.0\ref\QuizApi.dll
+C:\Users\lucasbg\Desktop\Elevate\QuizApi\bin\Debug\net8.0\Novell.Directory.Ldap.NETStandard.dll

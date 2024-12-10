@@ -30,8 +30,7 @@ namespace Elevate.QuizApi.Dominio.DTOs
             Tipo = quiz.Tipo;
             Titulo = quiz.Titulo;
             QuantidadePerguntaPorQuiz = quiz.QuantidadePerguntaPorQuiz;
-
-            Perguntas = quiz.Perguntas.Select(p => new PerguntaDto(p,quiz.Id)).ToList();
+            Perguntas =  quiz?.Perguntas != null ? quiz.Perguntas.Select(p => new PerguntaDto(p,quiz.Id)).ToList() : new List<PerguntaDto>();
             //IdEvento = idEvento;
 
         }

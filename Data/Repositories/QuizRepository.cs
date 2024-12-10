@@ -107,7 +107,11 @@ namespace Elevate.QuizApi.Data.Repositories
             try
             {
 
-                var quiz = await _context.Quizzes.Include(q => q.Perguntas).FirstOrDefaultAsync(q => q.Id == id);
+                var quiz = await _context.Quizzes
+                    .Include(q => q.Perguntas)
+                    .ThenInclude(p => p.Respostas)
+                    .FirstOrDefaultAsync(q => q.Id == id);
+                    
                 if(quiz == null)
                 {
                     throw new Exception("Quiz está nulo");

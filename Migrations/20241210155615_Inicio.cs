@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace QuizApi.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCommitEndPoint : Migration
+    public partial class Inicio : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,22 +16,21 @@ namespace QuizApi.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Evento",
+                name: "Quiz",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    DataInicio = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    DataFim = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     Titulo = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    Descricao = table.Column<string>(type: "varchar(500)", maxLength: 500, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                    Tipo = table.Column<int>(type: "int", maxLength: 50, nullable: false),
+                    QuantidadePerguntaPorQuiz = table.Column<int>(type: "int", nullable: false),
+                    TempoTotalQuiz = table.Column<TimeSpan>(type: "time(6)", nullable: false),
+                    IdEvento = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Evento", x => x.Id);
+                    table.PrimaryKey("PK_Quiz", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -51,36 +50,6 @@ namespace QuizApi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Usuario", x => x.Id);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "Quiz",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Titulo = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Tipo = table.Column<int>(type: "int", maxLength: 50, nullable: false),
-                    TempoTotalQuiz = table.Column<TimeSpan>(type: "time(6)", nullable: false),
-                    IdEvento = table.Column<int>(type: "int", nullable: false),
-                    EventoId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Quiz", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Quiz_Evento_EventoId",
-                        column: x => x.EventoId,
-                        principalTable: "Evento",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Quiz_Evento_IdEvento",
-                        column: x => x.IdEvento,
-                        principalTable: "Evento",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -112,7 +81,6 @@ namespace QuizApi.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Texto = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Tempo = table.Column<TimeSpan>(type: "time(6)", nullable: true),
                     IdQuiz = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -135,8 +103,9 @@ namespace QuizApi.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     DataJogo = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     IdUsuario = table.Column<int>(type: "int", nullable: false),
-                    IdResposta = table.Column<int>(type: "int", nullable: false),
-                    JogoId = table.Column<int>(type: "int", nullable: true)
+                    idJogo = table.Column<int>(type: "int", nullable: false),
+                    JogoId = table.Column<int>(type: "int", nullable: true),
+                    IdResposta = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -224,16 +193,6 @@ namespace QuizApi.Migrations
                 column: "IdQuiz");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Quiz_EventoId",
-                table: "Quiz",
-                column: "EventoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Quiz_IdEvento",
-                table: "Quiz",
-                column: "IdEvento");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_RespostaJogoUsuario_RespostaId",
                 table: "RespostaJogoUsuario",
                 column: "RespostaId");
@@ -267,9 +226,6 @@ namespace QuizApi.Migrations
 
             migrationBuilder.DropTable(
                 name: "Quiz");
-
-            migrationBuilder.DropTable(
-                name: "Evento");
         }
     }
 }

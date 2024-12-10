@@ -28,7 +28,7 @@ namespace Elevate.QuizApi.Dominio.DTOs
             Id = pergunta.Id;
             Texto = pergunta.Texto;
             IdQuiz = idQuiz;
-            Respostas = pergunta.Respostas.Select(r => new RespostaDto(r, pergunta.Id)).ToList(); // Linq atua nesses casos.
+            Respostas =  pergunta?.Respostas != null ?  pergunta.Respostas.Select(r => new RespostaDto(r)).ToList() : new List<RespostaDto>(); // Linq atua nesses casos.
         }
 
 

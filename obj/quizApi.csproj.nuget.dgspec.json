@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\lucasbg\\Desktop\\Elevate\\QuizApi\\QuizApi.csproj": {}
+    "C:\\Users\\lucasbg\\Desktop\\Elevate\\QuizApi\\QuizApi.csproj": {}
   },
   "projects": {
-    "c:\\Users\\lucasbg\\Desktop\\Elevate\\QuizApi\\QuizApi.csproj": {
+    "C:\\Users\\lucasbg\\Desktop\\Elevate\\QuizApi\\QuizApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\lucasbg\\Desktop\\Elevate\\QuizApi\\QuizApi.csproj",
+        "projectUniqueName": "C:\\Users\\lucasbg\\Desktop\\Elevate\\QuizApi\\QuizApi.csproj",
         "projectName": "QuizApi",
-        "projectPath": "c:\\Users\\lucasbg\\Desktop\\Elevate\\QuizApi\\QuizApi.csproj",
+        "projectPath": "C:\\Users\\lucasbg\\Desktop\\Elevate\\QuizApi\\QuizApi.csproj",
         "packagesPath": "C:\\Users\\lucasbg\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\lucasbg\\Desktop\\Elevate\\QuizApi\\obj\\",
+        "outputPath": "C:\\Users\\lucasbg\\Desktop\\Elevate\\QuizApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\lucasbg\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -58,6 +58,10 @@
             "Microsoft.EntityFrameworkCore.Relational": {
               "target": "Package",
               "version": "[8.0.2, )"
+            },
+            "Novell.Directory.Ldap.NETStandard2_0": {
+              "target": "Package",
+              "version": "[3.1.0, )"
             },
             "Pomelo.EntityFrameworkCore.MySql": {
               "target": "Package",

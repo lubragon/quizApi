@@ -11,7 +11,7 @@ namespace Elevate.QuizApi.Dominio.Entities
 
         public string Email { get; set; }
 
-        public string HashSenha { get; set; }
+        public string? HashSenha { get; set; }
         // TODO SENHA E HASH LDAP
 
         public Usuario(string nome, string email, string hashSenha)

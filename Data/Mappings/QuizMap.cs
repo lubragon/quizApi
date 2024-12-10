@@ -23,9 +23,6 @@ namespace Elevate.QuizApi.Data.Mappings
                 .WithOne()
                 .HasForeignKey(p => p.IdQuiz);
 
-            // builder.HasOne(q => q.Evento)
-            //     .WithMany()
-            //     .HasForeignKey(q => q.IdEvento);
         }
     }
 }

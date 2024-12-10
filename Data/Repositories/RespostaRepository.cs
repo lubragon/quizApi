@@ -31,7 +31,7 @@ namespace Elevate.QuizApi.Data.Repositories
 					throw new Exception("Respostas nulas");
 				}
 
-        var respostasDto = respostas.Select(r => new RespostaDto(r, id)).ToList();
+        var respostasDto = respostas.Select(r => new RespostaDto(r)).ToList();
 
         //var respostaSemGabarito = respostasDto.Select(r => Removedor.RemoverIsCorreta(r)).ToList();
 

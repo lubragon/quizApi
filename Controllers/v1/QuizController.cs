@@ -35,10 +35,10 @@ namespace Elevate.QuizApi.Controllers.v1
                         => Ok(await _quizService.GetAllQuizzes());
                 
                 [HttpGet]
-                [Route("getQuizById/id={id}")]
-                public async Task<IActionResult> GetQuizById(int id)
+                [Route("getQuizById")]
+                public async Task<IActionResult> GetQuizById([FromQuery]  int idQuiz)
                 
-                        => Ok(await _quizService.GetQuizById(id));
+                        => Ok(await _quizService.GetQuizById(idQuiz));
                 
                 [HttpPatch]
                 [Route("editarQuizById/id={id}")]

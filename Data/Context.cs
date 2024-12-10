@@ -27,7 +27,7 @@ namespace Elevate.QuizApi.Data
             modelBuilder.ApplyConfiguration(new PerguntaMap());
             modelBuilder.ApplyConfiguration(new RespostasMap());
             modelBuilder.ApplyConfiguration(new UsuarioMap());
-            modelBuilder.ApplyConfiguration(new EventoMap());
+            //modelBuilder.ApplyConfiguration(new EventoMap());
             modelBuilder.ApplyConfiguration(new JogoUsuarioMap());
 
 
