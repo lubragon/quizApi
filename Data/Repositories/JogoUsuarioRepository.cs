@@ -19,15 +19,15 @@ namespace Elevate.QuizApi.Data.Repositories
             _context = context;
         }
 
-        public virtual async Task<JogoUsuario> CriarJogoUsuario(JogoUsuario obj, int idQuiz, int idJogo)
+        public virtual async Task<JogoUsuario> CriarJogoUsuario(JogoUsuario obj)
         {
             try
             {
-                if(obj == null)
+                if (obj == null)
                 {
                     throw new Exception("JogoUsuario nulo");
                 }
-           
+
                 _context.JogosUsuarios.Add(obj);
                 await _context.SaveChangesAsync();
                 return obj;
@@ -62,35 +62,46 @@ namespace Elevate.QuizApi.Data.Repositories
             }
         }
 
-        // public virtual async Task<JogoUsuario> GetJogoUsuarioById(int id)
-        // {
-        //     try
-        //     {
-        //         var jogoUsuario = await _context.JogosUsuarios.Include(ju => ju.Usuario).Include(ju => ju.Resposta).FirstOrDefaultAsync(ju => ju.Id == id);
-        //         if (jogoUsuario == null)
-        //         {
-        //             throw new InvalidOperationException($"Jogo do usuário com ID {id} não foi encontrado.");
-        //         }
-                
-        //         return jogoUsuario;
-        //     }
-        //     catch (Exception ex)
-        //     {
-        //         throw new Exception("Erro ao obter o jogo do usuário pelo ID", ex);
-        //     }
-        // }
+        public virtual async Task<GetRespostasDto> GetJogoUsuarioByJogoIdAndUsuarioId(int jogoId, int usuarioId)
+        {
+            try
+            {
+                var jogoUsuario = await _context.JogosUsuarios
+                    .Where(ju => ju.IdJogo == jogoId)
+                    .Where(ju => ju.IdUsuario == usuarioId)
+                    .Include(r => r.Resposta)
+                    .ToListAsync();
+
+                if (jogoUsuario == null)
+                {
+                    throw new InvalidOperationException($"Erro ao buscar respostas.");
+                }
+
+                GetRespostasDto resultado = new GetRespostasDto
+                {
+                    TotalCorretas = jogoUsuario.Count((jogo) => jogo.Resposta[0].IsCorreta),
+                    TotalRespostas = jogoUsuario.Count()
+                };
+
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao obter o jogo do usuário pelo ID", ex);
+            }
+        }
 
         public virtual async Task<List<JogoUsuario>> GetTodosJogosUsuarios()
         {
             try
-            {   
+            {
                 var listaJogoUsuarios = await _context.JogosUsuarios.Include(ju => ju.Usuario).Include(ju => ju.Resposta).ToListAsync();
                 if (listaJogoUsuarios == null)
                 {
                     throw new Exception("JogoUsuario não nulo");
                 }
-                
-                
+
+
                 return listaJogoUsuarios;
             }
             catch (Exception ex)
@@ -98,7 +109,7 @@ namespace Elevate.QuizApi.Data.Repositories
                 throw new Exception("Erro ao obter todos os jogos dos usuários", ex);
             }
         }
-    
-    
+
+
     }
 }

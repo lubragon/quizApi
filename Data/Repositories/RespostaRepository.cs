@@ -43,5 +43,23 @@ namespace Elevate.QuizApi.Data.Repositories
 				throw new Exception("Erro ao obter respostas", ex);
 			}
 		}
+
+		public virtual async Task<Resposta> GetRespostaById(int id)
+		{
+			try
+			{
+				var respostaId = await _context.Respostas.FirstOrDefaultAsync(r => r.Id == id);
+				if(respostaId == null)
+				{
+					throw new Exception("Resposta nula");
+				}
+
+				return respostaId;
+			}
+			catch(Exception ex)
+			{
+				throw new Exception("Erro ao obter resposta",  ex);	
+			}
+		}
 	}      
 }

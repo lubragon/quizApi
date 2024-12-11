@@ -31,6 +31,7 @@ builder.Services.AddScoped<IPerguntaService, PerguntaService>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<IRespostaService, RespostaService>();
 builder.Services.AddScoped<IJogoService, JogoService>();
+builder.Services.AddScoped<IJogoUsuarioService, JogoUsuarioService>();
 
 
 //IRepository Repository
@@ -41,6 +42,7 @@ builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<IJogoRepository, JogoRepository>();
 builder.Services.AddScoped<IJogoUsuarioRepository, JogoUsuarioRepository>();
 builder.Services.AddScoped<IRespostaRepository, RespostaRepository>();
+builder.Services.AddScoped<IJogoUsuarioRepository, JogoUsuarioRepository>();
 
 builder.Services.AddControllers()
               .AddJsonOptions(options =>

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace QuizApi.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20241210155615_Inicio")]
-    partial class Inicio
+    [Migration("20241211131748_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -57,23 +57,17 @@ namespace QuizApi.Migrations
                     b.Property<DateTime?>("DataJogo")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("IdResposta")
+                    b.Property<int>("IdJogo")
                         .HasColumnType("int");
 
                     b.Property<int>("IdUsuario")
                         .HasColumnType("int");
 
-                    b.Property<int?>("JogoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("idJogo")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("IdUsuario");
+                    b.HasIndex("IdJogo");
 
-                    b.HasIndex("JogoId");
+                    b.HasIndex("IdUsuario");
 
                     b.ToTable("JogoUsuario", (string)null);
                 });
@@ -175,7 +169,6 @@ namespace QuizApi.Migrations
                         .HasColumnType("varchar(50)");
 
                     b.Property<string>("HashSenha")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .IsUnicode(true)
                         .HasColumnType("varchar(100)");
@@ -217,15 +210,17 @@ namespace QuizApi.Migrations
 
             modelBuilder.Entity("Elevate.QuizApi.Dominio.Entities.JogoUsuario", b =>
                 {
+                    b.HasOne("Elevate.QuizApi.Dominio.Entities.Jogo", "Jogo")
+                        .WithMany("JogoUsuarios")
+                        .HasForeignKey("IdJogo")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Elevate.QuizApi.Dominio.Entities.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("IdUsuario")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("Elevate.QuizApi.Dominio.Entities.Jogo", "Jogo")
-                        .WithMany("JogoUsuarios")
-                        .HasForeignKey("JogoId");
 
                     b.Navigation("Jogo");
 

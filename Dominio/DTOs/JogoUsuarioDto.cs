@@ -19,13 +19,13 @@ namespace Elevate.QuizApi.Dominio.DTOs
 
         }
 
-        public JogoUsuarioDto(JogoUsuario jogoUsuario, int idUsuario, int idJogo)
-        {
-            Id = jogoUsuario.Id;
-            IdUsuario = idUsuario;
-            IdResposta = jogoUsuario.IdResposta;
-            IdJogo = idJogo;
-        }
+        // public JogoUsuarioDto(JogoUsuario jogoUsuario)
+        // {
+        //     Id = jogoUsuario.Id;
+        //     IdUsuario = jogoUsuario.IdUsuario;
+        //     IdResposta = jogoUsuario.IdResposta;
+        //     IdJogo = jogoUsuario.IdJogo;
+        // }
 
 
     }   

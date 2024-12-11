@@ -17,9 +17,15 @@ namespace Elevate.QuizApi.Services
         {
             _respostaRepository = respostaRepository;
         }
+
         public Task<IList<RespostaDto>> GetAllRespostasByPerguntaId(int id)
         {
             return _respostaRepository.GetAllRespostasByPerguntaId(id);
+        }
+
+        public Task<Resposta> GetRespostaById(int id)
+        {
+            return _respostaRepository.GetRespostaById(id);
         }
 
 

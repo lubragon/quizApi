@@ -27,13 +27,17 @@ namespace Elevate.QuizApi.Controllers.v1
 
 					[HttpPost]
 					[Route("responder")]
-					public async Task<IActionResult> CriarJogoUsuario(JogoUsuarioDto jogoUsuarioDto, int idQuiz, int idJogo)
+					public async Task<IActionResult> CriarJogoUsuario(JogoUsuarioDto jogoUsuarioDto)
 					{
 							var jogoUsuario = new JogoUsuario(jogoUsuarioDto);
-							return  Ok(await _jogoUsuarioService.CriarJogoUsuario(jogoUsuarioDto, idQuiz, idJogo));
+							return  Ok(await _jogoUsuarioService.CriarJogoUsuario(jogoUsuario, jogoUsuarioDto.IdResposta));
 
 					}
 
 
+					[HttpGet]
+					[Route("getRespostas")]
+					public async Task<IActionResult> GetJogoUsuarioByJogoIdAndUsuarioId(int jogoId, int usuarioId)
+								=> Ok(await _jogoUsuarioService.GetJogoUsuarioByJogoIdAndUsuarioId(jogoId, usuarioId));
 	}
 }

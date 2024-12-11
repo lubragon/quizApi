@@ -6,7 +6,8 @@ namespace Elevate.QuizApi.Services.Interfaces
 
     public interface IJogoUsuarioService
     {
-			Task<JogoUsuarioDto> CriarJogoUsuario(JogoUsuarioDto jogo, int idQuiz, int idJogo);
+			Task<JogoUsuario> CriarJogoUsuario(JogoUsuario jogoUsuario, int idResposta);
+            Task<GetRespostasDto> GetJogoUsuarioByJogoIdAndUsuarioId(int jogoId, int usuarioId);
 
     }
 

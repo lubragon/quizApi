@@ -5,6 +5,7 @@ using Elevate.QuizApi.Dominio.Interfaces;
 using System.ComponentModel.DataAnnotations;
 using Elevate.QuizApi.Data.Repositories;
 using Elevate.QuizApi.Dominio.DTOs;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Elevate.QuizApi.Services
 {
@@ -13,20 +14,32 @@ namespace Elevate.QuizApi.Services
     {
 
         private readonly IJogoUsuarioRepository _jogoUsuarioRepository;
+        private readonly IRespostaRepository _respostaRepository;
 
 
         public JogoUsuarioService(
-            IJogoUsuarioRepository jogoUsuarioRepository
+            IJogoUsuarioRepository jogoUsuarioRepository,
+            IRespostaRepository respostaRepository
         )
             // Aqui deve ser o repositorio
         {
             _jogoUsuarioRepository = jogoUsuarioRepository;
+            _respostaRepository = respostaRepository;
 
         }
 
-        public Task<JogoUsuarioDto> CriarJogoUsuario(JogoUsuarioDto jogoUsuarioDto, int idQuiz, int idJogo)
+        public async Task<JogoUsuario> CriarJogoUsuario(JogoUsuario jogoUsuario, int idResposta)
         {
-             return _jogoUsuarioRepository.CriarJogoUsuario(jogoUsuarioDto, idQuiz, idJogo);
+            var resposta = await _respostaRepository.GetRespostaById(idResposta);
+            jogoUsuario.Resposta.Add(resposta);
+             return await _jogoUsuarioRepository.CriarJogoUsuario(jogoUsuario);
         }
+
+        public async Task<GetRespostasDto> GetJogoUsuarioByJogoIdAndUsuarioId([FromQuery] int jogoId, int usuarioId)
+        {
+            return await _jogoUsuarioRepository.GetJogoUsuarioByJogoIdAndUsuarioId(jogoId, usuarioId);
+        }
+
+
 		}
 	}

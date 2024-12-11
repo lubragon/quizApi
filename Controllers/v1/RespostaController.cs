@@ -24,5 +24,7 @@ namespace Elevate.QuizApi.Controllers.v1
 			public async Task<IActionResult> GetAllRespostasByPerguntaId(int idPergunta)
 
 							=> Ok(await _respostaService.GetAllRespostasByPerguntaId(idPergunta));
+		
+		
 		}
 }

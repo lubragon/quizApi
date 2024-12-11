@@ -20,6 +20,11 @@ namespace Elevate.QuizApi.Data.Mappings
             builder.HasMany(ju => ju.Resposta)
                 .WithMany()
                 .UsingEntity(j => j.ToTable("RespostaJogoUsuario"));
+
+                
+            builder.HasOne(j => j.Jogo)
+                .WithMany(ju => ju.JogoUsuarios)
+                .HasForeignKey(j => j.IdJogo);
         }
     }
 

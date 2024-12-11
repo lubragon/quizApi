@@ -10,6 +10,7 @@ namespace Elevate.QuizApi.Dominio.Interfaces
         //Task<Jogo> CriarJogo(Jogo jogo);
         //Task<Jogo> EditarJogo(Jogo jogo);
         Task<IList<RespostaDto>> GetAllRespostasByPerguntaId(int id);
+        Task<Resposta> GetRespostaById(int id);
 
     }
 

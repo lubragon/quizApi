@@ -12,6 +12,11 @@ namespace Elevate.QuizApi.Dominio.Entities
 
         public int IdPergunta { get; set; }
 
+
+        public Resposta(int id)
+        {
+            Id = id;
+        }
         public Resposta(string texto, bool isCorreta)
         {
             Texto = texto;
