@@ -14,6 +14,8 @@ namespace Elevate.QuizApi.Dominio.Interfaces
         Task<Usuario> GetUsuarioById(int id);
         Task<UsuarioDto> GetUsuarioByEmail(string email);
         Task<List<Usuario>> GetUsuarioByNome(string nome);
+        Task<Usuario> GetByLogin (string login);
+        Task<UsuarioDto> Insert (UsuarioDto usuario);
 
 
     }

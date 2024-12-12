@@ -130,6 +130,42 @@ namespace Elevate.QuizApi.Data.Repositories
                 throw new Exception("Erro ao obter o usuário pelo nome", ex);
             }
         }
+
+        public virtual async Task<Usuario> GetByLogin(string login)
+        {
+            try
+            {
+                var usuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.Login == login);
+            
+                return usuario;
+                
+
+            }
+            catch(Exception e)
+            {
+                throw new Exception("Erro ao obter usuário");
+            }
+        }
+
+            public async Task<UsuarioDto> Insert(UsuarioDto usuarioDto)
+        {
+            try
+            {   var usuario = new Usuario(usuarioDto);
+                if (usuario is null)
+                    return null;
+
+                _context.Usuarios.Add(usuario);
+                await _context.SaveChangesAsync();
+
+                var user = new UsuarioDto(usuario);
+
+                return user;
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error insert");
+            }
+        }
     }
 
 

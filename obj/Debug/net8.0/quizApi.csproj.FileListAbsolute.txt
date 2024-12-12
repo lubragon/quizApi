@@ -126,6 +126,7 @@ C:\Users\lucasbg\Desktop\Elevate\QuizApi\bin\Debug\net8.0\Microsoft.Extensions.D
 C:\Users\lucasbg\Desktop\Elevate\QuizApi\bin\Debug\net8.0\Microsoft.OpenApi.dll
 C:\Users\lucasbg\Desktop\Elevate\QuizApi\bin\Debug\net8.0\Mono.TextTemplating.dll
 C:\Users\lucasbg\Desktop\Elevate\QuizApi\bin\Debug\net8.0\MySqlConnector.dll
+C:\Users\lucasbg\Desktop\Elevate\QuizApi\bin\Debug\net8.0\Novell.Directory.Ldap.NETStandard.dll
 C:\Users\lucasbg\Desktop\Elevate\QuizApi\bin\Debug\net8.0\Pomelo.EntityFrameworkCore.MySql.dll
 C:\Users\lucasbg\Desktop\Elevate\QuizApi\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\lucasbg\Desktop\Elevate\QuizApi\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
@@ -210,4 +211,3 @@ C:\Users\lucasbg\Desktop\Elevate\QuizApi\obj\Debug\net8.0\refint\QuizApi.dll
 C:\Users\lucasbg\Desktop\Elevate\QuizApi\obj\Debug\net8.0\QuizApi.pdb
 C:\Users\lucasbg\Desktop\Elevate\QuizApi\obj\Debug\net8.0\QuizApi.genruntimeconfig.cache
 C:\Users\lucasbg\Desktop\Elevate\QuizApi\obj\Debug\net8.0\ref\QuizApi.dll
-C:\Users\lucasbg\Desktop\Elevate\QuizApi\bin\Debug\net8.0\Novell.Directory.Ldap.NETStandard.dll

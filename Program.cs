@@ -11,6 +11,10 @@ using Elevate.QuizApi.Services.Interfaces;
 using Microsoft.AspNetCore.Http.Json;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using QuizApi.Dominio.Settings;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Authentication.Cookies;
+
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +23,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+string CorsPolicy = "All";
 
 builder.Services.AddDbContext<Context>(options => 
         options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
@@ -32,10 +37,11 @@ builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<IRespostaService, RespostaService>();
 builder.Services.AddScoped<IJogoService, JogoService>();
 builder.Services.AddScoped<IJogoUsuarioService, JogoUsuarioService>();
+builder.Services.AddScoped<ILDAPService, LdapService>();
+
 
 
 //IRepository Repository
-
 builder.Services.AddScoped<IQuizRepository, QuizRepository>();
 builder.Services.AddScoped<IPerguntaRepository, PerguntaRepository>();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
@@ -59,8 +65,53 @@ builder.Services.AddControllers()
                     // options.JsonSerializerOptions.MaxDepth = 3;
                     // options.JsonSerializerOptions.NumberHandling = JsonNumberHandling.AllowReadingFromString;
               });
+    builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(CorsPolicy,
+                builder =>
+                {
+                    builder
+                        .WithOrigins("http://localhost:4200")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials();
+                });
+            });
+
+
+var ldapSettings = builder.Configuration.GetSection("LdapSettings").Get<LdapSettings>() ?? new();
+var appSettings = builder.Configuration.GetSection("AppSettings").Get<AppSettings>() ?? new();
+var sameSiteMode = Enum.Parse<SameSiteMode>(appSettings.SameSiteMode);
+var cookieSecurePolicy = Enum.Parse<CookieSecurePolicy>(appSettings.CookieSecurePolicy);
+
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
+                options =>
+                {
+                    options.SlidingExpiration = true;
+                    options.ExpireTimeSpan = TimeSpan.FromMinutes(appSettings.ExpireTokenInMinutes);
+                    options.Cookie.SameSite = sameSiteMode;
+                    options.Cookie.SecurePolicy = cookieSecurePolicy;
+                    options.Cookie.Name = "QuizCookie";
+                    options.Events.OnRedirectToLogin = context =>
+                    {
+                        context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                        return Task.CompletedTask;
+                    };
+                });    
+    
+builder.Services.AddSingleton(appSettings);
+builder.Services.AddSingleton(ldapSettings);
+
+
 
 var app = builder.Build();
+
+app.UseAuthentication();
+app.UseAuthorization();
+app.UseCors(CorsPolicy);
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -69,8 +120,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// var ldapSettings = new LDAPSettings();
-// new ConfigureFromConfigurationOptions<LDAPSettings>(Configuration.GetSection("LDAPSettings")).Configure(ldapSettings);
+
 
 app.UseCors(options => options.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader());
 

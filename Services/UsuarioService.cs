@@ -38,5 +38,15 @@ namespace Elevate.QuizApi.Services
         {
             return _usuarioRepository.GetUsuarioByEmail(emailUsuario);
         }
+
+        public Task<Usuario> GetByLogin(string login)
+        {
+            return _usuarioRepository.GetByLogin(login);
+        }
+
+        public Task<UsuarioDto> Insert(UsuarioDto usuario)
+        {
+            return _usuarioRepository.Insert(usuario);
+        }
     }
 }
