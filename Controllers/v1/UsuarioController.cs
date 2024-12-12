@@ -33,7 +33,5 @@ namespace Elevate.QuizApi.Controllers.v1
                 public async Task<IActionResult> GetUsuarioByEmail(string email)
                         => Ok(await _usuarioService.GetUsuarioByEmail(email));
 
-
-                // TODO Usuario ENDPOINTS
         }
 }

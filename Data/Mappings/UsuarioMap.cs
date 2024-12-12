@@ -20,9 +20,9 @@ namespace Elevate.QuizApi.Data.Mappings
             builder.Property(u => u.Email)
                 .IsUnicode(true)
                 .HasMaxLength(50);
-            builder.Property(u => u.HashSenha)
-                .IsUnicode(true)
-                .HasMaxLength(100);
+            
+            builder.Property(u => u.Tipo)
+                .HasMaxLength(1);
         }
     }
 }

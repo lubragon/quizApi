@@ -29,11 +29,6 @@ namespace Elevate.QuizApi.Data
             modelBuilder.ApplyConfiguration(new UsuarioMap());
             //modelBuilder.ApplyConfiguration(new EventoMap());
             modelBuilder.ApplyConfiguration(new JogoUsuarioMap());
-
-
-            //modelBuilder.ApplyConfiguration(new PlacarMap());
-            // TODO VALIDAR
-
             base.OnModelCreating(modelBuilder);
 
             var utcConverter = new ValueConverter<DateTime, DateTime>(v => v, v => DateTime.SpecifyKind(v, DateTimeKind.Utc));

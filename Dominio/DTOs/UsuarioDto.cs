@@ -1,6 +1,7 @@
 
 
 using Elevate.QuizApi.Dominio.Entities;
+using Elevate.QuizApi.Dominio.Enums;
 
 namespace Elevate.QuizApi.Dominio.DTOs
 {
@@ -9,11 +10,15 @@ namespace Elevate.QuizApi.Dominio.DTOs
         public string Nome { get; set; }
 
         public string Email { get; set; }
+        public TipoUsuarioEnum Tipo{ get; set; }
 
-        public UsuarioDto(string nome, string email)
+
+        public UsuarioDto(string nome, string email, TipoUsuarioEnum tipo)
         {
             Nome = nome;
             Email = email;
+            Tipo = tipo;
+
 
         }
 
@@ -26,6 +31,7 @@ namespace Elevate.QuizApi.Dominio.DTOs
             Id = usuario.Id;
             Nome = usuario.Nome;
             Email = usuario.Email;
+            Tipo = usuario.Tipo;
 
         } 
     }

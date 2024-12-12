@@ -113,8 +113,6 @@ namespace Elevate.QuizApi.Data.Repositories
             }
         }
 
-
-        // TODO RETORNA LISTA??
         public virtual async Task<List<Usuario>> GetUsuarioByNome(string nome)
         {
             try

@@ -7,8 +7,6 @@ namespace Elevate.QuizApi.Dominio.DTOs
     {
 
         public int Id { get; set; }
-        // TODO
-        //public int IdUsuario { get; set; }
         public int IdQuiz { get; set; }
 
         public int Pontuacao { get; set; }

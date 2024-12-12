@@ -1,5 +1,6 @@
 
 using Elevate.QuizApi.Dominio.DTOs;
+using Elevate.QuizApi.Dominio.Enums;
 using Elevate.QuizApi.Dominio.Models;
 
 namespace Elevate.QuizApi.Dominio.Entities
@@ -11,14 +12,17 @@ namespace Elevate.QuizApi.Dominio.Entities
 
         public string Email { get; set; }
 
-        public string? HashSenha { get; set; }
+        public TipoUsuarioEnum Tipo{ get; set; }
+
+        //public string? HashSenha { get; set; }
         // TODO SENHA E HASH LDAP
 
-        public Usuario(string nome, string email, string hashSenha)
+        public Usuario(string nome, string email, TipoUsuarioEnum tipo)
         {
             Nome = nome;
             Email = email;
-            HashSenha = hashSenha;
+            Tipo = tipo;
+            //HashSenha = hashSenha;
         }
 
         public Usuario(UsuarioDto usuarioDto)
@@ -26,6 +30,7 @@ namespace Elevate.QuizApi.Dominio.Entities
             Id = usuarioDto.Id;
             Nome = usuarioDto.Nome;
             Email = usuarioDto.Email;
+            Tipo = usuarioDto.Tipo;
             //HashSenha = usuarioDto.HashSenha;
         }
 
