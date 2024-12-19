@@ -4,6 +4,7 @@ using Elevate.QuizApi.Dominio.Entities;
 using Elevate.QuizApi.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -62,6 +63,7 @@ namespace Elevate.QuizApi.Controllers.v1
         public async Task<IActionResult> Logoff()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+                    
             return Ok();
         }
     }

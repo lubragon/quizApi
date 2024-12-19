@@ -14,15 +14,18 @@ using Microsoft.Extensions.Options;
 using QuizApi.Dominio.Settings;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Elevate.QuizApi.Controllers.Hubs;
 
 
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddSignalR();
+
 string CorsPolicy = "All";
 
 builder.Services.AddDbContext<Context>(options => 
@@ -38,6 +41,7 @@ builder.Services.AddScoped<IRespostaService, RespostaService>();
 builder.Services.AddScoped<IJogoService, JogoService>();
 builder.Services.AddScoped<IJogoUsuarioService, JogoUsuarioService>();
 builder.Services.AddScoped<ILDAPService, LdapService>();
+builder.Services.AddScoped<IRespostaJogoUsuarioService, RespostaJogoUsuarioService>();
 
 
 
@@ -49,6 +53,8 @@ builder.Services.AddScoped<IJogoRepository, JogoRepository>();
 builder.Services.AddScoped<IJogoUsuarioRepository, JogoUsuarioRepository>();
 builder.Services.AddScoped<IRespostaRepository, RespostaRepository>();
 builder.Services.AddScoped<IJogoUsuarioRepository, JogoUsuarioRepository>();
+builder.Services.AddScoped<IRespostaJogoUsuarioRepository, RespostaJogoUsuarioRepository>();
+
 
 builder.Services.AddControllers()
               .AddJsonOptions(options =>
@@ -56,27 +62,19 @@ builder.Services.AddControllers()
 
                 options.JsonSerializerOptions.IgnoreNullValues = true;
                 options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
-             
-                    // options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
-                    // options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
-                    // options.JsonSerializerOptions.WriteIndented = false;    
-                    // options.JsonSerializerOptions.Encoder = JavaScriptEncoder.Default;
-                    // options.JsonSerializerOptions.AllowTrailingCommas = true;
-                    // options.JsonSerializerOptions.MaxDepth = 3;
-                    // options.JsonSerializerOptions.NumberHandling = JsonNumberHandling.AllowReadingFromString;
-              });
-    builder.Services.AddCors(options =>
+             });
+builder.Services.AddCors(options =>
+        {
+            options.AddPolicy(CorsPolicy,
+            builder =>
             {
-                options.AddPolicy(CorsPolicy,
-                builder =>
-                {
-                    builder
-                        .WithOrigins("http://localhost:4200")
-                        .AllowAnyMethod()
-                        .AllowAnyHeader()
-                        .AllowCredentials();
-                });
+                builder
+                    .WithOrigins("http://localhost:4200")
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials();
             });
+        });
 
 
 var ldapSettings = builder.Configuration.GetSection("LdapSettings").Get<LdapSettings>() ?? new();
@@ -111,6 +109,12 @@ var app = builder.Build();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseCors(CorsPolicy);
+
+// app.UseEndpoints(endpoints => 
+// {
+//     endpoints.MapHub<QuizHub>("/QuizHub");
+
+// });
 
 
 // Configure the HTTP request pipeline.

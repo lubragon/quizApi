@@ -28,10 +28,8 @@ namespace Elevate.QuizApi.Services
 
         }
 
-        public async Task<JogoUsuario> CriarJogoUsuario(JogoUsuario jogoUsuario, int idResposta)
+        public async Task<JogoUsuario> CriarJogoUsuario(JogoUsuario jogoUsuario)
         {
-            var resposta = await _respostaRepository.GetRespostaById(idResposta);
-            jogoUsuario.Resposta.Add(resposta);
              return await _jogoUsuarioRepository.CriarJogoUsuario(jogoUsuario);
         }
 

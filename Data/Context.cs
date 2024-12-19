@@ -19,6 +19,8 @@ namespace Elevate.QuizApi.Data
         public DbSet<Jogo> Jogos { get; set; } = null!;
         public DbSet<JogoUsuario> JogosUsuarios { get; set; } = null!;
         public DbSet<Resposta> Respostas { get; set; } = null!;
+        public DbSet<RespostaJogoUsuario> RespostaJogoUsuarios { get; set; }
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -29,6 +31,9 @@ namespace Elevate.QuizApi.Data
             modelBuilder.ApplyConfiguration(new UsuarioMap());
             //modelBuilder.ApplyConfiguration(new EventoMap());
             modelBuilder.ApplyConfiguration(new JogoUsuarioMap());
+            modelBuilder.ApplyConfiguration(new RespostaJogoUsuarioMap());
+
+
             base.OnModelCreating(modelBuilder);
 
             var utcConverter = new ValueConverter<DateTime, DateTime>(v => v, v => DateTime.SpecifyKind(v, DateTimeKind.Utc));

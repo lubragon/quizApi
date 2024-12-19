@@ -9,7 +9,9 @@ namespace Elevate.QuizApi.Dominio.Entities
     {
         public DateTime? DataJogo { get; set; }
 
-        public int IdUsuario {get; set;}
+        public int? IdUsuario {get; set;}
+
+        public string? JogadorAvulso {get; set;}
         public Usuario? Usuario { get; set; }
         public int IdJogo { get; set; }
         public Jogo? Jogo { get; set; }
@@ -25,7 +27,10 @@ namespace Elevate.QuizApi.Dominio.Entities
             Id = jogoUsuarioDto.Id;
             IdUsuario = jogoUsuarioDto.IdUsuario;
             IdJogo = jogoUsuarioDto.IdJogo;
+            JogadorAvulso = jogoUsuarioDto.JogadorAvulso;
+
         }
+
 
 
 

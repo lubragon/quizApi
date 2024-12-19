@@ -4,6 +4,7 @@ using Elevate.QuizApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace QuizApi.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20241218172924_CriandoEntidadeRJU")]
+    partial class CriandoEntidadeRJU
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -161,29 +164,6 @@ namespace QuizApi.Migrations
                     b.ToTable("Respostas", (string)null);
                 });
 
-            modelBuilder.Entity("Elevate.QuizApi.Dominio.Entities.RespostaJogoUsuario", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("IdJogoUsuario")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdResposta")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IdJogoUsuario");
-
-                    b.HasIndex("IdResposta");
-
-                    b.ToTable("RespostaJogoUsuario", (string)null);
-                });
-
             modelBuilder.Entity("Elevate.QuizApi.Dominio.Entities.Usuario", b =>
                 {
                     b.Property<int>("Id")
@@ -263,25 +243,6 @@ namespace QuizApi.Migrations
                     b.HasOne("Elevate.QuizApi.Dominio.Entities.JogoUsuario", null)
                         .WithMany("Resposta")
                         .HasForeignKey("JogoUsuarioId");
-                });
-
-            modelBuilder.Entity("Elevate.QuizApi.Dominio.Entities.RespostaJogoUsuario", b =>
-                {
-                    b.HasOne("Elevate.QuizApi.Dominio.Entities.JogoUsuario", "JogoUsuario")
-                        .WithMany()
-                        .HasForeignKey("IdJogoUsuario")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Elevate.QuizApi.Dominio.Entities.Resposta", "Resposta")
-                        .WithMany()
-                        .HasForeignKey("IdResposta")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("JogoUsuario");
-
-                    b.Navigation("Resposta");
                 });
 
             modelBuilder.Entity("Elevate.QuizApi.Dominio.Entities.Jogo", b =>

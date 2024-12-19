@@ -13,13 +13,17 @@ namespace Elevate.QuizApi.Data.Mappings
 
             builder.HasKey(j => j.Id);
 
+            builder.Property(j =>j.JogadorAvulso)
+                .IsUnicode(true)
+                .HasMaxLength(20);
+
             builder.HasOne(j => j.Usuario)
                 .WithMany()
                 .HasForeignKey(j => j.IdUsuario);
  
-            builder.HasMany(ju => ju.Resposta)
-                .WithMany()
-                .UsingEntity(j => j.ToTable("RespostaJogoUsuario"));
+            // builder.HasMany(ju => ju.Resposta)
+            //     .WithMany()
+            //     .UsingEntity(j => j.ToTable("RespostaJogoUsuario"));
 
                 
             builder.HasOne(j => j.Jogo)

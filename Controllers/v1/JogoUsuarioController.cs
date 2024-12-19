@@ -2,6 +2,7 @@ using Elevate.QuizApi.Dominio.DTOs;
 using Elevate.QuizApi.Dominio.Entities;
 using Elevate.QuizApi.Dominio.Interfaces;
 using Elevate.QuizApi.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -14,7 +15,6 @@ using System.Threading.Tasks;
 
 namespace Elevate.QuizApi.Controllers.v1
 {
-
 	public class JogoUsuarioController : BaseController
 	{
 					private readonly IJogoUsuarioService _jogoUsuarioService;
@@ -26,17 +26,17 @@ namespace Elevate.QuizApi.Controllers.v1
 
 
 					[HttpPost]
-					[Route("responder")]
+					[Route("entrarJogo")]
 					public async Task<IActionResult> CriarJogoUsuario(JogoUsuarioDto jogoUsuarioDto)
 					{
 							var jogoUsuario = new JogoUsuario(jogoUsuarioDto);
-							return  Ok(await _jogoUsuarioService.CriarJogoUsuario(jogoUsuario, jogoUsuarioDto.IdResposta));
+							return  Ok(await _jogoUsuarioService.CriarJogoUsuario(jogoUsuario));
 
 					}
 
 
 					[HttpGet]
-					[Route("getRespostas")]
+					[Route("getRespostasOld")]
 					public async Task<IActionResult> GetJogoUsuarioByJogoIdAndUsuarioId(int jogoId, int usuarioId)
 								=> Ok(await _jogoUsuarioService.GetJogoUsuarioByJogoIdAndUsuarioId(jogoId, usuarioId));
 	}

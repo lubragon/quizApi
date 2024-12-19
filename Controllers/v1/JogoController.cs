@@ -2,6 +2,7 @@ using Elevate.QuizApi.Dominio.DTOs;
 using Elevate.QuizApi.Dominio.Entities;
 using Elevate.QuizApi.Dominio.Interfaces;
 using Elevate.QuizApi.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -14,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Elevate.QuizApi.Controllers.v1
 {
-
+	//[Authorize]
 	public class JogoController : BaseController
 	{
 					private readonly IJogoService _jogoService;

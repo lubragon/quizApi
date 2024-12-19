@@ -1,11 +1,12 @@
 using Elevate.QuizApi.Dominio.DTOs;
 using Elevate.QuizApi.Dominio.Entities;
 using Elevate.QuizApi.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Elevate.QuizApi.Controllers.v1
 {
-
+        //[Authorize]
         public class QuizController : BaseController
         {
                 private readonly IQuizService _quizService;
