@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace QuizApi.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20241218140726_JogadorAvulsoMaxLenght")]
-    partial class JogadorAvulsoMaxLenght
+    [Migration("20241220172952_TesteJUsu")]
+    partial class TesteJUsu
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,9 +21,9 @@ namespace QuizApi.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "8.0.2")
-                .HasAnnotation("Relational:MaxIdentifierLength", 64);
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("Elevate.QuizApi.Dominio.Entities.Jogo", b =>
                 {
@@ -31,10 +31,13 @@ namespace QuizApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("IdQuiz")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsJogoIniciado")
+                        .HasColumnType("bit");
 
                     b.Property<int?>("QuizId")
                         .HasColumnType("int");
@@ -52,10 +55,10 @@ namespace QuizApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime?>("DataJogo")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("IdJogo")
                         .HasColumnType("int");
@@ -66,13 +69,18 @@ namespace QuizApi.Migrations
                     b.Property<string>("JogadorAvulso")
                         .HasMaxLength(20)
                         .IsUnicode(true)
-                        .HasColumnType("varchar(20)");
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<int?>("JogoId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("IdJogo");
 
                     b.HasIndex("IdUsuario");
+
+                    b.HasIndex("JogoId");
 
                     b.ToTable("JogoUsuario", (string)null);
                 });
@@ -83,7 +91,7 @@ namespace QuizApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("IdQuiz")
                         .HasColumnType("int");
@@ -92,7 +100,7 @@ namespace QuizApi.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .IsUnicode(true)
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
@@ -107,7 +115,7 @@ namespace QuizApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("IdEvento")
                         .HasColumnType("int");
@@ -116,7 +124,7 @@ namespace QuizApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<TimeSpan>("TempoTotalQuiz")
-                        .HasColumnType("time(6)");
+                        .HasColumnType("time");
 
                     b.Property<int>("Tipo")
                         .HasMaxLength(50)
@@ -125,7 +133,7 @@ namespace QuizApi.Migrations
                     b.Property<string>("Titulo")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -138,25 +146,53 @@ namespace QuizApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("IdPergunta")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsCorreta")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasColumnName("Gabarito");
+
+                    b.Property<int?>("JogoUsuarioId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Texto")
                         .IsRequired()
                         .HasMaxLength(500)
-                        .HasColumnType("varchar(500)");
+                        .HasColumnType("nvarchar(500)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("IdPergunta");
 
+                    b.HasIndex("JogoUsuarioId");
+
                     b.ToTable("Respostas", (string)null);
+                });
+
+            modelBuilder.Entity("Elevate.QuizApi.Dominio.Entities.RespostaJogoUsuario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("IdJogoUsuario")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdResposta")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdJogoUsuario");
+
+                    b.HasIndex("IdResposta");
+
+                    b.ToTable("RespostaJogoUsuario", (string)null);
                 });
 
             modelBuilder.Entity("Elevate.QuizApi.Dominio.Entities.Usuario", b =>
@@ -165,23 +201,23 @@ namespace QuizApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(50)
                         .IsUnicode(true)
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Login")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(50)
                         .IsUnicode(true)
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("Tipo")
                         .HasMaxLength(1)
@@ -190,21 +226,6 @@ namespace QuizApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Usuario", (string)null);
-                });
-
-            modelBuilder.Entity("JogoUsuarioResposta", b =>
-                {
-                    b.Property<int>("JogoUsuarioId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RespostaId")
-                        .HasColumnType("int");
-
-                    b.HasKey("JogoUsuarioId", "RespostaId");
-
-                    b.HasIndex("RespostaId");
-
-                    b.ToTable("RespostaJogoUsuario", (string)null);
                 });
 
             modelBuilder.Entity("Elevate.QuizApi.Dominio.Entities.Jogo", b =>
@@ -219,7 +240,7 @@ namespace QuizApi.Migrations
             modelBuilder.Entity("Elevate.QuizApi.Dominio.Entities.JogoUsuario", b =>
                 {
                     b.HasOne("Elevate.QuizApi.Dominio.Entities.Jogo", "Jogo")
-                        .WithMany("JogoUsuarios")
+                        .WithMany()
                         .HasForeignKey("IdJogo")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -227,6 +248,10 @@ namespace QuizApi.Migrations
                     b.HasOne("Elevate.QuizApi.Dominio.Entities.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("IdUsuario");
+
+                    b.HasOne("Elevate.QuizApi.Dominio.Entities.Jogo", null)
+                        .WithMany("JogoUsuarios")
+                        .HasForeignKey("JogoId");
 
                     b.Navigation("Jogo");
 
@@ -249,26 +274,39 @@ namespace QuizApi.Migrations
                         .HasForeignKey("IdPergunta")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Elevate.QuizApi.Dominio.Entities.JogoUsuario", null)
+                        .WithMany("Resposta")
+                        .HasForeignKey("JogoUsuarioId");
                 });
 
-            modelBuilder.Entity("JogoUsuarioResposta", b =>
+            modelBuilder.Entity("Elevate.QuizApi.Dominio.Entities.RespostaJogoUsuario", b =>
                 {
-                    b.HasOne("Elevate.QuizApi.Dominio.Entities.JogoUsuario", null)
+                    b.HasOne("Elevate.QuizApi.Dominio.Entities.JogoUsuario", "JogoUsuario")
                         .WithMany()
-                        .HasForeignKey("JogoUsuarioId")
+                        .HasForeignKey("IdJogoUsuario")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Elevate.QuizApi.Dominio.Entities.Resposta", null)
+                    b.HasOne("Elevate.QuizApi.Dominio.Entities.Resposta", "Resposta")
                         .WithMany()
-                        .HasForeignKey("RespostaId")
+                        .HasForeignKey("IdResposta")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("JogoUsuario");
+
+                    b.Navigation("Resposta");
                 });
 
             modelBuilder.Entity("Elevate.QuizApi.Dominio.Entities.Jogo", b =>
                 {
                     b.Navigation("JogoUsuarios");
+                });
+
+            modelBuilder.Entity("Elevate.QuizApi.Dominio.Entities.JogoUsuario", b =>
+                {
+                    b.Navigation("Resposta");
                 });
 
             modelBuilder.Entity("Elevate.QuizApi.Dominio.Entities.Pergunta", b =>

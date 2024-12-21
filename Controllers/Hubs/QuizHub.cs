@@ -14,19 +14,35 @@ using System.Threading.Tasks;
 
 namespace Elevate.QuizApi.Controllers.Hubs
 {
-	public class QuizHub
+	public class QuizHub : Hub
 	{
 
-					private readonly IJogoUsuarioService _jogoUsuarioService;
+					// private readonly IJogoUsuarioService _jogoUsuarioService;
 
-					public QuizHub(IJogoUsuarioService jogoUsuarioService)
+					// public QuizHub(IJogoUsuarioService jogoUsuarioService)
+					// {
+					// 		_jogoUsuarioService = jogoUsuarioService;									  
+					// }
+
+				  public async Task EntrarNoJogo(string message)
 					{
-							_jogoUsuarioService = jogoUsuarioService;									  
+							try
+							{
+									//await Groups.AddToGroupAsync(Context.ConnectionId, jogoId);
+					        await Clients.All.SendAsync("JogadorEntrou", message);
+									//Console.WriteLine($"Jogador {jogadorNome} entrou no jogo {jogoId}");
+							}
+							catch (Exception ex)
+							{
+									Console.WriteLine($"Erro no método EntrarNoJogo: {ex.Message}");
+									throw;
+							}
 					}
-
-        // Registrar no hub
-				//Lista usuarios
-				// Entrar na sala - Registrar no SIGNALR
+					public async Task IniciarJogo(string jogoId)
+					{
+							await Clients.All.SendAsync("JogoIniciado", $"Jogo {jogoId} foi iniciado");
+							Console.WriteLine($"Notificação de início enviada para o grupo {jogoId}");
+			    }
 
 				// Verificar se todo mundo jha respondeu
 

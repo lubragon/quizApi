@@ -8,7 +8,7 @@ namespace Elevate.QuizApi.Dominio.Interfaces
     public interface IJogoRepository
     {
         Task<Jogo> CriarJogo(Jogo jogo , int idQuiz);
-        //Task<Jogo> EditarJogo(Jogo jogo);
+        Task<Jogo> IniciarJogoById(int jogoId);
         Task<Jogo> DeletarJogoById(int id);
         Task<Jogo> GetJogoById(int id);
         Task<List<Jogo>> GetTodosJogos();

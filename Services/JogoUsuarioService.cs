@@ -30,7 +30,7 @@ namespace Elevate.QuizApi.Services
 
         public async Task<JogoUsuario> CriarJogoUsuario(JogoUsuario jogoUsuario)
         {
-             return await _jogoUsuarioRepository.CriarJogoUsuario(jogoUsuario);
+            return await _jogoUsuarioRepository.CriarJogoUsuario(jogoUsuario);
         }
 
         public async Task<GetRespostasDto> GetJogoUsuarioByJogoIdAndUsuarioId([FromQuery] int jogoId, int usuarioId)

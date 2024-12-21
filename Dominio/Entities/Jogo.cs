@@ -10,6 +10,8 @@ namespace Elevate.QuizApi.Dominio.Entities
         public int IdQuiz {get; set;}
         public Quiz? Quiz { get; set; }
 
+        public bool IsJogoIniciado { get; set; } = false;
+
         public IList<JogoUsuario> JogoUsuarios { get; set; } = [];
 
         public Jogo()
@@ -25,6 +27,7 @@ namespace Elevate.QuizApi.Dominio.Entities
             Id = jogoDto.Id;
             IdQuiz = idQuiz;
             JogoUsuarios = jogoDto.JogoUsuariosDto.Select(ju => new JogoUsuario(ju)).ToList(); // Linq atua nesses casos.
+            IsJogoIniciado = jogoDto.IsJogoIniciado;
         }
     }
 

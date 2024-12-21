@@ -1,6 +1,8 @@
+using Elevate.QuizApi.Controllers.Hubs;
 using Elevate.QuizApi.Dominio.DTOs;
 using Elevate.QuizApi.Dominio.Entities;
 using Elevate.QuizApi.Dominio.Interfaces;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -10,10 +12,13 @@ namespace Elevate.QuizApi.Data.Repositories
     public class JogoRepository : IJogoRepository
     {
         private readonly Context _context;
+        private readonly QuizHub _hubContext;
 
-        public JogoRepository(Context context)
+        public JogoRepository(Context context, QuizHub hubContext)
         {
             _context = context;
+            _hubContext = hubContext;
+
         }
         public virtual async Task<Jogo> CriarJogo(Jogo jogo, int idQuiz)
         {
@@ -83,7 +88,37 @@ namespace Elevate.QuizApi.Data.Repositories
             }
         }
 
+        public virtual async Task<Jogo> IniciarJogoById(int jogoId)
+        {
+            try
+            {
+                var jogo = await _context.Jogos.Include(j => j.JogoUsuarios).FirstOrDefaultAsync(j => j.Id == jogoId);
 
+                if (jogo == null)
+                {
+                    throw new Exception($"Jogo com ID {jogoId} não encontrado.");
+                }
+
+                if (jogo.IsJogoIniciado)
+                {
+                    throw new Exception($"Jogo com ID {jogoId} já foi iniciado.");
+                }
+
+                jogo.IsJogoIniciado = true;
+
+                _context.Jogos.Update(jogo);
+                await _context.SaveChangesAsync();
+                //await _hubContext.Clients.All.SendAsync($"PartidaIniciada?id={jogoId}");
+ 
+
+                return jogo;
+
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Erro ao iniciar jogo", ex);
+            }
+        }
 
     }
 

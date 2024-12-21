@@ -8,6 +8,7 @@ namespace Elevate.QuizApi.Dominio.DTOs
     {
         public int IdQuiz { get; set; }
         //public Quiz? Quiz { get; set; }
+        public bool IsJogoIniciado { get; set; }
 
         public IList<JogoUsuarioDto> JogoUsuariosDto { get; set; } = [];
 
@@ -21,6 +22,7 @@ namespace Elevate.QuizApi.Dominio.DTOs
         {
             Id = jogo.Id;
             IdQuiz = idQuiz;
+            IsJogoIniciado = jogo.IsJogoIniciado;
         }
 
 

@@ -15,13 +15,10 @@ namespace Elevate.QuizApi.Data.Mappings
             builder.ToTable("Jogo");
 
             builder.HasKey(j => j.Id);
-
-
                 
             builder.HasOne(j => j.Quiz)
                 .WithMany(q => q.Jogo)
                 .HasForeignKey(q => q.IdQuiz);
-
         }
 
     }

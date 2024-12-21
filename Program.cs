@@ -24,14 +24,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSignalR();
 
-string CorsPolicy = "All";
+string CorsPolicy = "AllowAll";
 
 builder.Services.AddDbContext<Context>(options => 
-        options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
-            new MySqlServerVersion(new Version(8, 0, 21)))
+        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
+
+builder.Services.AddTransient<QuizHub>();
 
 // IService Service
 builder.Services.AddScoped<IQuizService, QuizService>();
@@ -62,6 +62,8 @@ builder.Services.AddControllers()
 
                 options.JsonSerializerOptions.IgnoreNullValues = true;
                 options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+                options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+
              });
 builder.Services.AddCors(options =>
         {
@@ -69,12 +71,16 @@ builder.Services.AddCors(options =>
             builder =>
             {
                 builder
-                    .WithOrigins("http://localhost:4200")
+                    //.WithOrigins("http://localhost:4200")
                     .AllowAnyMethod()
                     .AllowAnyHeader()
-                    .AllowCredentials();
+                    .AllowCredentials()
+                    .SetIsOriginAllowed( _ => true );
             });
         });
+
+
+builder.Services.AddSignalR();
 
 
 var ldapSettings = builder.Configuration.GetSection("LdapSettings").Get<LdapSettings>() ?? new();
@@ -110,11 +116,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.UseCors(CorsPolicy);
 
-// app.UseEndpoints(endpoints => 
-// {
-//     endpoints.MapHub<QuizHub>("/QuizHub");
+app.MapHub<QuizHub>("/QuizHub");
 
-// });
 
 
 // Configure the HTTP request pipeline.
@@ -122,6 +125,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    
 }
 
 

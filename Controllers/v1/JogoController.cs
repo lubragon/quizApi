@@ -34,6 +34,14 @@ namespace Elevate.QuizApi.Controllers.v1
 						return  Ok(await _jogoService.CriarJogo(jogo, idQuiz));
 
         }
+
+				[HttpPut]
+        [Route("iniciarJogo/{jogoId}")]
+				public async Task<IActionResult> IniciarJogoById(int jogoId)
+        {
+						return  Ok(await _jogoService.IniciarJogoById(jogoId));
+        }
+
 				
 	}
 }

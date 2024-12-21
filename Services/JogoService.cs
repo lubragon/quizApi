@@ -29,6 +29,12 @@ namespace Elevate.QuizApi.Services
         {
             return _jogoRepository.CriarJogo(jogo, idQuiz);
         }
+
+        public Task<Jogo> IniciarJogoById(int jogoId)
+        {
+            return _jogoRepository.IniciarJogoById(jogoId);
+        }
+
     }
 
 
