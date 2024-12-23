@@ -37,7 +37,10 @@ namespace Elevate.QuizApi.Services
         {
             return await _jogoUsuarioRepository.GetJogoUsuarioByJogoIdAndUsuarioId(jogoId, usuarioId);
         }
+        public Task<JogoUsuario> AdicionarPontuacaoFinal(int jogoUsuarioId, int pontuacaoFinal) 
+        {
+            return _jogoUsuarioRepository.AdicionarPontuacaoFinal(jogoUsuarioId, pontuacaoFinal);
+        }
 
-
-		}
-	}
+    }
+}

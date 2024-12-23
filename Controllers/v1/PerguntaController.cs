@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Elevate.QuizApi.Controllers.v1
 {
-        [Authorize]
+        //[Authorize]
         public class PerguntaController : BaseController
         {
                 private readonly IPerguntaService _perguntaService;

@@ -9,6 +9,7 @@ namespace Elevate.QuizApi.Services.Interfaces
 			Task<JogoUsuario> CriarJogoUsuario(JogoUsuario jogoUsuario);
             Task<GetRespostasDto> GetJogoUsuarioByJogoIdAndUsuarioId(int jogoId, int usuarioId);
 
+Task<JogoUsuario> AdicionarPontuacaoFinal(int jogoUsuarioId, int pontuacaoFinal);
     }
 
 

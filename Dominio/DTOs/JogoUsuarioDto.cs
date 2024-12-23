@@ -9,7 +9,7 @@ namespace Elevate.QuizApi.Dominio.DTOs
         //public DateTime? DataJogo { get; set; }
 
         public string? JogadorAvulso {get; set;}
-
+        public int? PontuacaoFinal { get; set; }
         public int? IdUsuario {get; set;}
         //public Usuario? Usuario { get; set; }
 

@@ -9,7 +9,7 @@ namespace Elevate.QuizApi.Dominio.Entities
     {
 
         public string Titulo {get; set;}
-        public TipoQuizEnum Tipo { get; set; }
+        public TipoQuizEnum? Tipo { get; set; }
 
         public int QuantidadePerguntaPorQuiz { get; set; }
         public IList<Pergunta> Perguntas { get; set; } = [];

@@ -108,7 +108,6 @@ namespace Elevate.QuizApi.Data.Repositories
 
                 _context.Jogos.Update(jogo);
                 await _context.SaveChangesAsync();
-                //await _hubContext.Clients.All.SendAsync($"PartidaIniciada?id={jogoId}");
  
 
                 return jogo;

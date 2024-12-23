@@ -7,7 +7,7 @@ namespace Elevate.QuizApi.Dominio.DTOs
     public class QuizDto : ModelBaseDto
     {
         public string Titulo {get; set;}
-        public TipoQuizEnum Tipo { get; set; }
+        public TipoQuizEnum? Tipo { get; set; }
         public int QuantidadePerguntaPorQuiz { get; set; }
 
         public IList<PerguntaDto> Perguntas { get; set; } = [];

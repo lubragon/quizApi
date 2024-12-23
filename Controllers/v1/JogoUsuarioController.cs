@@ -35,9 +35,18 @@ namespace Elevate.QuizApi.Controllers.v1
 					}
 
 
-					[HttpGet]
-					[Route("getRespostasOld")]
-					public async Task<IActionResult> GetJogoUsuarioByJogoIdAndUsuarioId(int jogoId, int usuarioId)
-								=> Ok(await _jogoUsuarioService.GetJogoUsuarioByJogoIdAndUsuarioId(jogoId, usuarioId));
+					// [HttpGet]
+					// [Route("getRespostasOld")]
+					// public async Task<IActionResult> GetJogoUsuarioByJogoIdAndUsuarioId(int jogoId, int usuarioId)
+					// 			=> Ok(await _jogoUsuarioService.GetJogoUsuarioByJogoIdAndUsuarioId(jogoId, usuarioId));
+
+					[HttpPut]
+					[Route("adicionarPontuacao")]
+					public async Task<IActionResult> AdicionarPontuacaoFinal(int jogoUsuarioId, int pontuacaoFinal)
+          {
+              return Ok(await _jogoUsuarioService.AdicionarPontuacaoFinal(jogoUsuarioId, pontuacaoFinal));
+          }
+
+								
 	}
 }

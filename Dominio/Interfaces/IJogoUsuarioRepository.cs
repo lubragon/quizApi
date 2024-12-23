@@ -11,6 +11,7 @@ namespace Elevate.QuizApi.Dominio.Interfaces
         Task<JogoUsuario> DeletarJogoUsuarioById(int id);
         Task<GetRespostasDto> GetJogoUsuarioByJogoIdAndUsuarioId(int jogoId, int usuarioId);
         Task<List<JogoUsuario>> GetTodosJogosUsuarios();
+        Task<JogoUsuario> AdicionarPontuacaoFinal(int jogoUsuarioId, int pontuacaoFinal);
 
     }
 

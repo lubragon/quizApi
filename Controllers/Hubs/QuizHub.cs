@@ -28,20 +28,25 @@ namespace Elevate.QuizApi.Controllers.Hubs
 					{
 							try
 							{
-									//await Groups.AddToGroupAsync(Context.ConnectionId, jogoId);
 					        await Clients.All.SendAsync("JogadorEntrou", message);
-									//Console.WriteLine($"Jogador {jogadorNome} entrou no jogo {jogoId}");
 							}
 							catch (Exception ex)
 							{
-									Console.WriteLine($"Erro no método EntrarNoJogo: {ex.Message}");
+									Console.WriteLine($"Erro API EntrarNoJogo: {ex.Message}");
 									throw;
 							}
 					}
-					public async Task IniciarJogo(string jogoId)
+					public async Task IniciarJogo(string message)
 					{
-							await Clients.All.SendAsync("JogoIniciado", $"Jogo {jogoId} foi iniciado");
-							Console.WriteLine($"Notificação de início enviada para o grupo {jogoId}");
+							try
+							{
+							await Clients.All.SendAsync("JogoIniciado", message);
+							}
+							catch (Exception ex)
+							{
+									Console.WriteLine($"Erro API JogoIniciado: {ex.Message}");
+									throw;
+							}
 			    }
 
 				// Verificar se todo mundo jha respondeu

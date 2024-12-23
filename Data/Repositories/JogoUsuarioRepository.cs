@@ -110,6 +110,28 @@ namespace Elevate.QuizApi.Data.Repositories
             }
         }
 
+        public virtual async Task<JogoUsuario> AdicionarPontuacaoFinal(int jogoUsuarioId, int pontuacaoFinal)
+        {
+            try
+            {
+                var jogoUsuario = await _context.JogosUsuarios.FindAsync(jogoUsuarioId);
+                if (jogoUsuario == null)
+                {
+                    throw new InvalidOperationException($"Jogo do usuário com ID {jogoUsuarioId} não foi encontrado.");
+                }
+                jogoUsuario.PontuacaoFinal = pontuacaoFinal;
+                _context.JogosUsuarios.Update(jogoUsuario);
+                await _context.SaveChangesAsync();
 
+                return jogoUsuario;
+                
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao adicionar pontuação final ao jogo do usuário", ex);
+            }
+
+
+        }   
     }
 }
