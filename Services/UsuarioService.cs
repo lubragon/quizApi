@@ -48,5 +48,9 @@ namespace Elevate.QuizApi.Services
         {
             return _usuarioRepository.Insert(usuario);
         }
+        public Task<Usuario> CriarUsuarioAdministrador(Usuario usuario)
+        {
+            return _usuarioRepository.CriarUsuarioAdministrador(usuario);
+        }
     }
 }

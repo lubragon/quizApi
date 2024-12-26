@@ -9,6 +9,7 @@ namespace Elevate.QuizApi.Services.Interfaces
         Task<Usuario> CriarUsuario(Usuario usuario);
         Task<Usuario> GetUsuarioById(int idUsuario); 
         Task<UsuarioDto> GetUsuarioByEmail(string emailUsuario); 
+        Task<Usuario> CriarUsuarioAdministrador(Usuario usuarioDto); 
 
         Task<Usuario> GetByLogin (string login);
         Task<UsuarioDto> Insert(UsuarioDto usuario);

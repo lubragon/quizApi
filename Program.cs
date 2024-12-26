@@ -80,7 +80,11 @@ builder.Services.AddCors(options =>
         });
 
 
-builder.Services.AddSignalR();
+builder.Services.AddSignalR()
+             .AddHubOptions<QuizHub>(options =>
+              {
+                options.EnableDetailedErrors = true;
+              });
 
 
 var ldapSettings = builder.Configuration.GetSection("LdapSettings").Get<LdapSettings>() ?? new();

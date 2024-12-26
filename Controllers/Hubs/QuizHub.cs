@@ -32,7 +32,7 @@ namespace Elevate.QuizApi.Controllers.Hubs
 							}
 							catch (Exception ex)
 							{
-									Console.WriteLine($"Erro API EntrarNoJogo: {ex.Message}");
+									Console.WriteLine($"Erro Hub EntrarNoJogo: {ex.Message}");
 									throw;
 							}
 					}
@@ -44,13 +44,34 @@ namespace Elevate.QuizApi.Controllers.Hubs
 							}
 							catch (Exception ex)
 							{
-									Console.WriteLine($"Erro API JogoIniciado: {ex.Message}");
+									Console.WriteLine($"Erro Hub JogoIniciado: {ex.Message}");
 									throw;
 							}
 			    }
 
+					public async Task FinalizarJogador(string nomeJogador, int pontuacaFinal) {
+						try
+						{
+							await Clients.All.SendAsync("JogadorFinalizou",nomeJogador, pontuacaFinal); //
+						}
+						catch (Exception ex)
+            {
+                Console.WriteLine($"Erro Hub JogadorFinalizou: {ex.Message}");
+                throw;
+            }
+					}
+					
+					// public async Task FinalizarJogador(string message) {
+					// 	try
+					// 	{
+					// 		await Clients.All.SendAsync("JogadorFinalizou", message);
+					// 	}
+					// 	catch (Exception ex)
+          //   {
+          //       Console.WriteLine($"Erro Hub JogadorFinalizou: {ex.Message}");
+          //       throw;
+          //   }
+					// }
 				// Verificar se todo mundo jha respondeu
-
-				
 	}
 }

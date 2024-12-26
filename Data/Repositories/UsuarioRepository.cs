@@ -73,6 +73,25 @@ namespace Elevate.QuizApi.Data.Repositories
                 throw new Exception("Erro ao editar o usuário", ex);
             }
         }
+        public virtual async Task<Usuario> CriarUsuarioAdministrador(Usuario usuario)
+        {
+            try
+            {
+                var usuarioExistente = await _context.Usuarios.FindAsync(usuario.Id);
+                if (usuarioExistente == null)
+                {
+                    throw new Exception($"Usuário com ID {usuario.Id} não foi encontrado.");
+                }
+                usuarioExistente.Tipo = usuario.Tipo;
+                _context.Usuarios.Update(usuarioExistente);
+                await _context.SaveChangesAsync();
+                return usuarioExistente;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao editar o usuário", ex);
+            }
+        }
 
         public virtual async Task<Usuario> GetUsuarioById(int id)
         {
